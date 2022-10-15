@@ -8,7 +8,7 @@ export const useNavStore = defineStore('NavStore', {
           icon: 'mdi-apps',
           title: 'Welcome',
           to: '/',
-          color: 'magenta',
+          color: 'indigo',
         },
         {
           icon: 'mdi-account',
