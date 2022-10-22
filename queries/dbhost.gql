@@ -1,0 +1,5 @@
+query getDBHost {
+  getDBHost {
+    dbHost
+  }
+}

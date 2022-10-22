@@ -1,3 +1,4 @@
+import { defineNuxtConfig } from 'nuxt/config'
 import vuetify from 'vite-plugin-vuetify'
 
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
@@ -25,5 +26,11 @@ export default defineNuxtConfig({
       nuxt.hooks.hook('vite:extendConfig', (config) => config.plugins.push(vuetify({ autoImport: true })))
     },
     '@pinia/nuxt',
+    'nuxt-graphql-client',
   ],
+  runtimeConfig: {
+    public: {
+      GQL_HOST: 'http://localhost:4000', // overwritten by process.env.GQL_HOST
+    },
+  },
 })
