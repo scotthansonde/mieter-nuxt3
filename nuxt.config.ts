@@ -31,6 +31,7 @@ export default defineNuxtConfig({
   runtimeConfig: {
     public: {
       GQL_HOST: 'http://localhost:4000', // overwritten by process.env.GQL_HOST
+      clientId: '812430523790-1t21ltft00a02s792om477spsvrcckmi.apps.googleusercontent.com',
     },
   },
 })
