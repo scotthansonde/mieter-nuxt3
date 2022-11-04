@@ -1,10 +1,7 @@
-import gAuthPlugin from 'vue3-google-oauth2'
+import vue3GoogleLogin from 'vue3-google-login'
 
 export default defineNuxtPlugin((nuxtApp) => {
-  nuxtApp.vueApp.use(gAuthPlugin, {
+  nuxtApp.vueApp.use(vue3GoogleLogin, {
     clientId: nuxtApp.$config.clientId,
-    scope: 'email',
-    prompt: 'consent',
-    fetch_basic_profile: false,
   })
 })
