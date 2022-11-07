@@ -1,0 +1,13 @@
+query getPeople {
+  getPeople {
+    _id
+    vorname
+    nachname
+    vollername
+    sortiername
+    personalnummer
+    kostenstelle
+    myPeopleID
+    myPeopleOrtID
+  }
+}
