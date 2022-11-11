@@ -1,4 +1,5 @@
 import { useAuthStore } from '@/stores/AuthStore'
+import { useLogout } from '~/composables/useLogout'
 
 export default defineNuxtRouteMiddleware(async (to, _from) => {
   const AuthStore = useAuthStore()
@@ -6,29 +7,19 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
   const token = useCookie('gql:default')
 
   if (noauthRoutes.includes(to.path)) {
-    if (token.value) {
-      return navigateTo('/')
-    }
+    if (token.value) return navigateTo('/')
     return
   }
 
   // if token or isLoggedIn is missing, logout
-  if (!token.value || !AuthStore.isLoggedIn) {
-    token.value = null
-    AuthStore.setUser(null)
-    return navigateTo('/login')
-  }
+  if (!token.value || !AuthStore.isLoggedIn) return useLogout()
 
   try {
     const { data } = await useAsyncGql('getCurrentUser')
     if (!data.value.getCurrentUser.email) {
-      token.value = null
-      AuthStore.setUser(null)
-      return navigateTo('/login')
+      return useLogout()
     }
   } catch (e) {
-    token.value = null
-    AuthStore.setUser(null)
-    return navigateTo('/login')
+    return useLogout()
   }
 })

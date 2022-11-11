@@ -15,7 +15,6 @@
         </v-container>
       </v-card-text>
     </v-card>
-    <pre v-if="user">{{ user }}</pre>
   </v-container>
 </template>
 
@@ -30,13 +29,12 @@ const googleLoginCallback = async (response) => {
   const accessToken = response.credential
   const userData = decodeCredential(response.credential)
   const { name, email, picture } = userData
-  AuthStore.setUser({ name, email, picture })
   useGqlToken(null)
   const { data } = await useAsyncGql('authGoogle', { accessToken })
   useGqlToken(data.value.authGoogle.token)
   const { data: currentUser } = await useAsyncGql('getCurrentUser')
-  console.log(currentUser.value.getCurrentUser)
   user.value = currentUser.value.getCurrentUser
+  AuthStore.setUser({ name, email, picture, ...user.value })
   navigateTo('/')
 }
 </script>
