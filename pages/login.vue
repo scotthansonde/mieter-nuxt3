@@ -8,7 +8,9 @@
         <v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <GoogleLogin :callback="googleLoginCallback" />
+            <ClientOnly>
+              <GoogleLogin :callback="googleLoginCallback" />
+            </ClientOnly>
           </v-card-actions>
         </v-container>
       </v-card-text>
@@ -29,10 +31,12 @@ const googleLoginCallback = async (response) => {
   const userData = decodeCredential(response.credential)
   const { name, email, picture } = userData
   AuthStore.setUser({ name, email, picture })
+  useGqlToken(null)
   const { data } = await useAsyncGql('authGoogle', { accessToken })
   useGqlToken(data.value.authGoogle.token)
   const { data: currentUser } = await useAsyncGql('getCurrentUser')
   console.log(currentUser.value.getCurrentUser)
   user.value = currentUser.value.getCurrentUser
+  navigateTo('/')
 }
 </script>

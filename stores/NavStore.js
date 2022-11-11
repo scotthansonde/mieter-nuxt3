@@ -55,6 +55,12 @@ export const useNavStore = defineStore('NavStore', {
           href: 'https://mcd-nordheide.freshdesk.com/',
           color: 'orange',
         },
+        {
+          icon: 'mdi-login',
+          title: 'Login',
+          to: '/login',
+          color: 'white',
+        },
       ],
     }
   },
