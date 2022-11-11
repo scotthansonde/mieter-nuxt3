@@ -8,6 +8,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
+    "@nuxtjs/google-fonts": "3.0.0-1",
     "nuxt": "^3.0.0-rc.13"
   },
   "dependencies": {
@@ -15,9 +16,9 @@
     "@pinia/nuxt": "^0.4.3",
     "nuxt-graphql-client": "^0.2.10",
     "roboto-fontface": "^0.10.0",
-    "sass": "^1.56.0",
+    "sass": "^1.56.1",
     "vite-plugin-vuetify": "^1.0.0",
     "vue3-google-login": "^2.0.12",
-    "vuetify": "^3.0.0"
+    "vuetify": "^3.0.1"
   }
 }
