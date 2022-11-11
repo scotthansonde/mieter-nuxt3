@@ -35,6 +35,6 @@ const googleLoginCallback = async (response) => {
   const { data: currentUser } = await useAsyncGql('getCurrentUser')
   user.value = currentUser.value.getCurrentUser
   AuthStore.setUser({ name, email, picture, ...user.value })
-  navigateTo('/')
+  return navigateTo('/')
 }
 </script>

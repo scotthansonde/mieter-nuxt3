@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 export const useNavStore = defineStore('NavStore', {
   state: () => {
     return {
+      drawer: false,
       items: [
         {
           icon: 'mdi-apps',
@@ -63,5 +64,10 @@ export const useNavStore = defineStore('NavStore', {
         },
       ],
     }
+  },
+  actions: {
+    toggleDrawer() {
+      this.drawer = !this.drawer
+    },
   },
 })
