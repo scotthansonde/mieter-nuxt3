@@ -13,14 +13,16 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
 
   // if token  is missing, logout
   if (!token.value) return useLogout()
-
-  try {
-    const { data } = await useAsyncGql('getCurrentUser')
-    if (!data.value.getCurrentUser.email) {
+  // do not getCurrentUser on the server
+  if (!process.server) {
+    try {
+      const { data } = await useAsyncGql('getCurrentUser')
+      if (!data.value.getCurrentUser.email) {
+        return useLogout()
+      }
+      AuthStore.setUser({ ...data.value.getCurrentUser })
+    } catch (e) {
       return useLogout()
     }
-    AuthStore.setUser({ ...data.value.getCurrentUser })
-  } catch (e) {
-    return useLogout()
   }
 })
