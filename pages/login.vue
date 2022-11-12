@@ -20,7 +20,9 @@
 
 <script setup>
 import { useAuthStore } from '@/stores/AuthStore'
+import { useSnackbarStore } from '@/stores/SnackbarStore'
 const AuthStore = useAuthStore()
+const SnackbarStore = useSnackbarStore()
 
 const googleLoginCallback = async (response) => {
   const accessToken = response.credential
@@ -29,6 +31,7 @@ const googleLoginCallback = async (response) => {
   useGqlToken(data.value.authGoogle.token)
   const { data: currentUser } = await useAsyncGql('getCurrentUser')
   AuthStore.setUser({ ...currentUser.value.getCurrentUser })
+  SnackbarStore.setSnackbar('You have been logged in')
   return navigateTo('/')
 }
 </script>
