@@ -1,15 +1,17 @@
 <template>
   <v-app-bar fixed app>
-    <v-app-bar-nav-icon @click.stop="NavStore.toggleDrawer" />
-    <v-toolbar-title>
-      Development
-      <span v-if="data?.getDBHost"> (db:{{ data.getDBHost.dbHost }}) </span>
-    </v-toolbar-title>
-    <v-spacer />
-    <div v-if="AuthStore.user?.username">
-      {{ AuthStore.user?.username }}
-      <v-btn color="red darken-1" text @click="useLogout">Logout</v-btn>
-    </div>
+    <ClientOnly fallback-tag="span" fallback="Loading...">
+      <v-app-bar-nav-icon @click.stop="NavStore.toggleDrawer" />
+      <v-toolbar-title>
+        Development
+        <span v-if="data?.getDBHost"> (db:{{ data.getDBHost.dbHost }}) </span>
+      </v-toolbar-title>
+      <v-spacer />
+      <div v-if="AuthStore.user?.username">
+        {{ AuthStore.user?.username }}
+        <v-btn color="red darken-1" text @click="useLogout">Logout</v-btn>
+      </div>
+    </ClientOnly>
   </v-app-bar>
 </template>
 
