@@ -11,3 +11,30 @@ query getPeople {
     myPeopleOrtID
   }
 }
+
+query getPersonById($_id: ID!) {
+  getPersonById(_id: $_id) {
+    _id
+    personalnummer
+    nachname
+    vorname
+    vollername
+    sortiername
+    geburtsdatum
+    geschlecht
+    nationalitaet
+    position
+    eintrittsdatum
+    austrittsdatum
+    vertragkost
+    lohnkost
+    kostenstelle
+    strasse
+    plz
+    ort
+    status
+    myPeopleOrt
+    myPeopleOrtID
+    myPeopleID
+  }
+}
