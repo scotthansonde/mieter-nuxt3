@@ -1,7 +1,8 @@
 <template>
   <v-app-bar fixed app>
     <ClientOnly fallback-tag="span" fallback="Loading...">
-      <v-app-bar-nav-icon @click.stop="NavStore.toggleDrawer" />
+      <v-app-bar-nav-icon v-if="AuthStore.user" @click.stop="NavStore.toggleDrawer" />
+      <v-app-bar-nav-icon v-else disabled />
       <v-toolbar-title>
         Development
         <span v-if="data?.getDBHost"> (db:{{ data.getDBHost.dbHost }}) </span>
