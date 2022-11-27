@@ -1431,13 +1431,13 @@
     tslib "^2.4.0"
     webcrypto-core "^1.7.4"
 
-"@pinia/nuxt@^0.4.5":
-  version "0.4.5"
-  resolved "https://registry.yarnpkg.com/@pinia/nuxt/-/nuxt-0.4.5.tgz#be97fe6d074955f1709231e336cb8ea2b3b1e147"
-  integrity sha512-lnJdZkpySxBArpiOLTJZtA+QSbODl6xIk4psgGWzrWiEwPjUSup/RmQ7zlWz7dmQTONA/mttR0j4V1Zh0b5NKA==
+"@pinia/nuxt@^0.4.6":
+  version "0.4.6"
+  resolved "https://registry.yarnpkg.com/@pinia/nuxt/-/nuxt-0.4.6.tgz#ce83714f700594187d8a29e8f4bdaf31abe0bef1"
+  integrity sha512-HjrYEfLdFpmsjhicPJgL36jVhzHWukIQPFFHGTSF84Cplu+f2nY2XHKqe9ToHzE9rLee2RjLOwAzOnXa/I/u6A==
   dependencies:
     "@nuxt/kit" "^3.0.0"
-    pinia ">=2.0.25"
+    pinia ">=2.0.27"
 
 "@rollup/plugin-alias@^4.0.2":
   version "4.0.2"
@@ -4956,10 +4956,10 @@ nuxi@3.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-nuxt-graphql-client@^0.2.14:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/nuxt-graphql-client/-/nuxt-graphql-client-0.2.14.tgz#ef15b607cff407809ba0d9845b9cf7fc61ff87c1"
-  integrity sha512-ZSdyEwiHmDJ887oOePIEJBIhQLJhuifvntQIrOE3AeWcB5tbqKZAX5Surt4AbHRknePNnhxNvKjW95IOVXJHrQ==
+nuxt-graphql-client@^0.2.16:
+  version "0.2.16"
+  resolved "https://registry.yarnpkg.com/nuxt-graphql-client/-/nuxt-graphql-client-0.2.16.tgz#49af2a072e77865467f4e03fc6abb5f5813019b3"
+  integrity sha512-U5vxU78NXZxK/eSeVLwwSVKCad9ODrjdS6usqlGmiiTQf1h/UjqS7+hft9TT678WbU+00xmILOYl+5OLR2/XDg==
   dependencies:
     "@graphql-codegen/cli" "npm:graphql-codegen-cli-nuxt@latest"
     "@graphql-codegen/typescript" "^2.8.1"
@@ -5316,10 +5316,10 @@ pify@^2.3.0:
   resolved "https://registry.npmjs.org/pify/-/pify-2.3.0.tgz"
   integrity sha512-udgsAY+fTnvv7kI7aaxbqwWNb0AHiB0qBO89PZKPkoTmGOgdbrHDKD+0B2X4uTfJ/FT1R09r9gTsjUjNJotuog==
 
-pinia@>=2.0.25:
-  version "2.0.25"
-  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.25.tgz#1e9d50ab54d106c8fcb39090293d780b3b8152b6"
-  integrity sha512-3reAkjJ6bW2D5hZKRMS0c9rUbHVlsVyZd037xO0PJr2AuF/09RRSBnFLlJgmHF4Jx6dEoW/jZBOHTushY7IMlw==
+pinia@>=2.0.27:
+  version "2.0.27"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-2.0.27.tgz#cf13a8dca2792a613c1d8bb8ef50707756e5a6ef"
+  integrity sha512-nOnXP0OFeL8R4WjAHsterU+11vptda643gH02xKNtSCDPiRzVfRYodOLihLDoa0gL1KKuQKV+KOzEgdt3YvqEw==
   dependencies:
     "@vue/devtools-api" "^6.4.5"
     vue-demi "*"
@@ -6786,10 +6786,10 @@ vue@^3.2.45:
     "@vue/server-renderer" "3.2.45"
     "@vue/shared" "3.2.45"
 
-vuetify@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.1.tgz#f64454b79cf11dc0d8d5a69f1ba258e8b34f183e"
-  integrity sha512-Vl4wYB4mCm6GFK6Q9KZDK+HM3YKI7md7BoUPwbgqZj4bkofjQ/8NVSRQQpTcwk0YoQrgw6qj0QaOtP5zitkS1Q==
+vuetify@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.2.tgz#734166f0800e47b9d4a7e714b943534d91b0579d"
+  integrity sha512-d+lb8DHUrrn9GnKaZW1dEApjIEamUcZn1HxomiQ0+y8t+jKjktpruo16AvAjpEHhAcCeWZ5RuK/S9HdT6z68Uw==
 
 wcwidth@^1.0.1:
   version "1.0.1"

@@ -4,6 +4,7 @@ import '@mdi/font/css/materialdesignicons.min.css'
 
 export default defineNuxtPlugin((nuxtApp) => {
   const vuetify = createVuetify({
+    ssr: true,
     theme: {
       defaultTheme: 'dark',
     },
