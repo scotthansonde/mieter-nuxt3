@@ -21,8 +21,6 @@ query getPersonById($_id: ID!) {
     vollername
     sortiername
     geburtsdatum
-    geschlecht
-    nationalitaet
     position
     eintrittsdatum
     austrittsdatum

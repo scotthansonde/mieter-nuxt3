@@ -2,12 +2,7 @@
   <v-container>
     <v-row>
       <v-col>
-        <nuxt-link to="/people">←People</nuxt-link>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col>
-        <v-card v-if="data?.getPersonById">
+        <v-card v-if="data">
           <v-card-title>{{ data?.getPersonById.vollername }} </v-card-title>
           <v-card-subtitle>
             <div>
@@ -23,6 +18,11 @@
             </div>
           </v-card-subtitle>
         </v-card>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-btn color="accent" to="/people"> ← </v-btn>
       </v-col>
     </v-row>
   </v-container>

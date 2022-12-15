@@ -16,7 +16,7 @@ export const useNavStore = defineStore('NavStore', {
           title: 'People ',
           to: '/people',
           color: 'yellow',
-          role: 'ADMIN',
+          role: 'USER',
         },
 
         {
