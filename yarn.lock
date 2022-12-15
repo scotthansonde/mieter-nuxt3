@@ -790,18 +790,6 @@
     "@graphql-tools/utils" "^9.1.1"
     tslib "~2.4.0"
 
-"@graphql-codegen/plugin-helpers@^2.6.2":
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-2.7.1.tgz#de999bdf8a1485f6f3c4c5f21cfb038e99d67e3e"
-  integrity sha512-wpEShhwbQp8pqXolnSCNaj0pU91LbuBvYHpYqm96TUqyeKQYAYRVmw3JIt0g8UQpKYhg8lYIDwWdcINOYqkGLg==
-  dependencies:
-    "@graphql-tools/utils" "^8.8.0"
-    change-case-all "1.0.14"
-    common-tags "1.8.2"
-    import-from "4.0.0"
-    lodash "~4.17.0"
-    tslib "~2.4.0"
-
 "@graphql-codegen/plugin-helpers@^2.7.2":
   version "2.7.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-2.7.2.tgz#6544f739d725441c826a8af6a49519f588ff9bed"
@@ -814,12 +802,24 @@
     lodash "~4.17.0"
     tslib "~2.4.0"
 
-"@graphql-codegen/schema-ast@^2.5.1":
-  version "2.5.1"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/schema-ast/-/schema-ast-2.5.1.tgz#ce030ae6de5dacd745848009ba0ca18c9c30910c"
-  integrity sha512-tewa5DEKbglWn7kYyVBkh3J8YQ5ALqAMVmZwiVFIGOao5u66nd+e4HuFqp0u+Jpz4SJGGi0ap/oFrEvlqLjd2A==
+"@graphql-codegen/plugin-helpers@^3.1.1":
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/plugin-helpers/-/plugin-helpers-3.1.1.tgz#c2e324df8e56942dc6d9947ec70025614f5f94d7"
+  integrity sha512-+V1WK4DUhejVSbkZrAsyv9gA4oQABVrtEUkT7vWq7gSf7Ln6OEM59lDUDsjp5wpLPTBIDJANbAe3qEd+iCB3Ow==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.6.2"
+    "@graphql-tools/utils" "^8.8.0"
+    change-case-all "1.0.15"
+    common-tags "1.8.2"
+    import-from "4.0.0"
+    lodash "~4.17.0"
+    tslib "~2.4.0"
+
+"@graphql-codegen/schema-ast@^2.6.0":
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/schema-ast/-/schema-ast-2.6.0.tgz#4572d9fb2ec64238c4e7eef954c0bdded170cafc"
+  integrity sha512-6wDVX/mKLXaJ3JwSflRsDJa6/+uEJ0Lg3mOQp3Ao2/jw1mijqAKjYgh1e1rcG+vzXpEmk29TC2ujsqAkKqzgMA==
+  dependencies:
+    "@graphql-codegen/plugin-helpers" "^3.1.1"
     "@graphql-tools/utils" "^8.8.0"
     tslib "~2.4.0"
 
@@ -833,25 +833,25 @@
     auto-bind "~4.0.0"
     tslib "~2.4.0"
 
-"@graphql-codegen/typescript-operations@^2.5.6":
-  version "2.5.7"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.5.7.tgz#324bec408ef1ab26eece9d0ace1d5780a2f9dd42"
-  integrity sha512-4TRyQy/GizcjkZsvN176C5O5bULyGB/lMXDWqg58A9AGf/P0n5n4QjgrMd2EG6tA3Xzg1tiBWhxYEFSmlPVETQ==
+"@graphql-codegen/typescript-operations@^2.5.8":
+  version "2.5.10"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-operations/-/typescript-operations-2.5.10.tgz#89a602e4d07ea1ab8d7d59309e1c2e65c7909439"
+  integrity sha512-N5H7JhcMRzjM2KdvCitqkOd4hphzD9q3NVWGLvBe3Xgqx5Cs3Y4GUcCJbRolSXdQcYBVgZpLZrUe/qoxwYyfeg==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.7.2"
-    "@graphql-codegen/typescript" "^2.8.2"
-    "@graphql-codegen/visitor-plugin-common" "2.13.2"
+    "@graphql-codegen/plugin-helpers" "^3.1.1"
+    "@graphql-codegen/typescript" "^2.8.5"
+    "@graphql-codegen/visitor-plugin-common" "2.13.5"
     auto-bind "~4.0.0"
     tslib "~2.4.0"
 
-"@graphql-codegen/typescript@^2.8.1", "@graphql-codegen/typescript@^2.8.2":
-  version "2.8.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-2.8.2.tgz#88d5b916d9b6c93b17d2300a0ddddda5696581c1"
-  integrity sha512-FWyEcJTHSxkImNgDRfsg4yBMJ11qPA6sPJ7v8Kviv5MaOFybclVSZ8WWfp7D8Dc6ix4zWfMd4dIl9ZIL/AJu8A==
+"@graphql-codegen/typescript@^2.8.3", "@graphql-codegen/typescript@^2.8.5":
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-2.8.5.tgz#6129cb3bf4bdcfba7f90f923ba7c2d839c222342"
+  integrity sha512-5w3zNlnNKM9tI5ZRbhESmsJ4G16rSiFmNQX6Ot56fmcYUC6bnAt5fqvSqs2C+8fVGIIjeWuwjQA5Xn1VkaLY8A==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.7.2"
-    "@graphql-codegen/schema-ast" "^2.5.1"
-    "@graphql-codegen/visitor-plugin-common" "2.13.2"
+    "@graphql-codegen/plugin-helpers" "^3.1.1"
+    "@graphql-codegen/schema-ast" "^2.6.0"
+    "@graphql-codegen/visitor-plugin-common" "2.13.5"
     auto-bind "~4.0.0"
     tslib "~2.4.0"
 
@@ -871,17 +871,17 @@
     parse-filepath "^1.0.2"
     tslib "~2.4.0"
 
-"@graphql-codegen/visitor-plugin-common@2.13.2":
-  version "2.13.2"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-2.13.2.tgz#cccc287d9b7eb25d9b8e54672a3807c1502c8091"
-  integrity sha512-qCZ4nfI1YjDuPz4lqGi0s4/5lOqHxdiQPFSwrXDENjHW+Z0oAiNYj6CFqob9ai2tLtXXKSUzMh/eeZDPmTrfhQ==
+"@graphql-codegen/visitor-plugin-common@2.13.5":
+  version "2.13.5"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-2.13.5.tgz#b6e4eb5f7af25273886f5222825f5b4bbe2a2b79"
+  integrity sha512-OV/mGnSvB/WkEqFu/3bPkAPDNRGRB3xONww5+06CObl383yGrasqM04shYYK4cpcCn9PVWFe8u0SLSEeGmMVrg==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.7.2"
+    "@graphql-codegen/plugin-helpers" "^3.1.1"
     "@graphql-tools/optimize" "^1.3.0"
     "@graphql-tools/relay-operation-optimizer" "^6.5.0"
     "@graphql-tools/utils" "^8.8.0"
     auto-bind "~4.0.0"
-    change-case-all "1.0.14"
+    change-case-all "1.0.15"
     dependency-graph "^0.11.0"
     graphql-tag "^2.11.0"
     parse-filepath "^1.0.2"
@@ -1204,10 +1204,10 @@
     semver "^7.3.5"
     tar "^6.1.11"
 
-"@mdi/font@^7.0.96":
-  version "7.0.96"
-  resolved "https://registry.npmjs.org/@mdi/font/-/font-7.0.96.tgz"
-  integrity sha512-rzlxTfR64hqY8yiBzDjmANfcd8rv+T5C0Yedv/TWk2QyAQYdc66e0kaN1ipmnYU3RukHRTRcBARHzzm+tIhL7w==
+"@mdi/font@^7.1.96":
+  version "7.1.96"
+  resolved "https://registry.yarnpkg.com/@mdi/font/-/font-7.1.96.tgz#211ca4acfa31964278e5085de595e8c73967d400"
+  integrity sha512-Imag6npmfkBDi2Ze2jiZVAPTDIKLxhz2Sx82xJ2zctyAU5LYJejLI5ChnDwiD9bMkQfVuzEsI98Q8toHyC+HCg==
 
 "@netlify/functions@^1.3.0":
   version "1.3.0"
@@ -2303,6 +2303,22 @@ change-case-all@1.0.14:
   version "1.0.14"
   resolved "https://registry.yarnpkg.com/change-case-all/-/change-case-all-1.0.14.tgz#bac04da08ad143278d0ac3dda7eccd39280bfba1"
   integrity sha512-CWVm2uT7dmSHdO/z1CXT/n47mWonyypzBbuCy5tN7uMg22BsfkhwT6oHmFCAk+gL1LOOxhdbB9SZz3J1KTY3gA==
+  dependencies:
+    change-case "^4.1.2"
+    is-lower-case "^2.0.2"
+    is-upper-case "^2.0.2"
+    lower-case "^2.0.2"
+    lower-case-first "^2.0.2"
+    sponge-case "^1.0.1"
+    swap-case "^2.0.2"
+    title-case "^3.0.3"
+    upper-case "^2.0.2"
+    upper-case-first "^2.0.2"
+
+change-case-all@1.0.15:
+  version "1.0.15"
+  resolved "https://registry.yarnpkg.com/change-case-all/-/change-case-all-1.0.15.tgz#de29393167fc101d646cd76b0ef23e27d09756ad"
+  integrity sha512-3+GIFhk3sNuvFAJKU46o26OdzudQlPNBCu1ZQi3cMeMHhty1bhDxu2WrEilVNYaGvqUtR1VSigFcJOiS13dRhQ==
   dependencies:
     change-case "^4.1.2"
     is-lower-case "^2.0.2"
@@ -4956,17 +4972,17 @@ nuxi@3.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-nuxt-graphql-client@^0.2.16:
-  version "0.2.16"
-  resolved "https://registry.yarnpkg.com/nuxt-graphql-client/-/nuxt-graphql-client-0.2.16.tgz#49af2a072e77865467f4e03fc6abb5f5813019b3"
-  integrity sha512-U5vxU78NXZxK/eSeVLwwSVKCad9ODrjdS6usqlGmiiTQf1h/UjqS7+hft9TT678WbU+00xmILOYl+5OLR2/XDg==
+nuxt-graphql-client@^0.2.23:
+  version "0.2.23"
+  resolved "https://registry.yarnpkg.com/nuxt-graphql-client/-/nuxt-graphql-client-0.2.23.tgz#7f05bb937add8f5b320a4a7530311e2c1b588c2e"
+  integrity sha512-+3DJIGYOTmR2JH5Rz95med53ZXM8KUnR6TKZ4DZ1K4D5Y2JuoxOc0bZfjIe7o/vFeF3qB8hr9TFdY+SjRkxFVQ==
   dependencies:
     "@graphql-codegen/cli" "npm:graphql-codegen-cli-nuxt@latest"
-    "@graphql-codegen/typescript" "^2.8.1"
+    "@graphql-codegen/typescript" "^2.8.3"
     "@graphql-codegen/typescript-graphql-request" "^4.5.8"
-    "@graphql-codegen/typescript-operations" "^2.5.6"
+    "@graphql-codegen/typescript-operations" "^2.5.8"
     "@nuxt/kit" latest
-    defu "^6.1.0"
+    defu "^6.1.1"
     graphql "^16.6.0"
     graphql-request "^5.0.0"
     knitwork "^1.0.0"
@@ -5905,10 +5921,10 @@ safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass@^1.56.1:
-  version "1.56.1"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.56.1.tgz#94d3910cd468fd075fa87f5bb17437a0b617d8a7"
-  integrity sha512-VpEyKpyBPCxE7qGDtOcdJ6fFbcpOM+Emu7uZLxVrkX8KVU/Dp5UF7WLvzqRuUhB6mqqQt1xffLoG+AndxTZrCQ==
+sass@^1.56.2:
+  version "1.56.2"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.56.2.tgz#9433b345ab3872996c82a53a58c014fd244fd095"
+  integrity sha512-ciEJhnyCRwzlBCB+h5cCPM6ie/6f8HrhZMQOf5vlU60Y1bI1rx5Zb0vlDZvaycHsg/MqFfF1Eq2eokAa32iw8w==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -6669,10 +6685,10 @@ vite-plugin-checker@^0.5.1:
     vscode-languageserver-textdocument "^1.0.1"
     vscode-uri "^3.0.2"
 
-vite-plugin-vuetify@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/vite-plugin-vuetify/-/vite-plugin-vuetify-1.0.0.tgz"
-  integrity sha512-30+W6H//wjOegKCha4wQ3IS+JyXDE6IayL5cK5S4IrM7WIceV/WitnxljbPZHER+Jyl3BGIuYV6nofjMOfRO1g==
+vite-plugin-vuetify@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/vite-plugin-vuetify/-/vite-plugin-vuetify-1.0.1.tgz#dcdf78f804c0cc6c7ff90087fe2e8766598ce112"
+  integrity sha512-/xHsIDuHxq7f6fDqCBYxNascLhDi+X8dV3RzTwmo4mGPrSnGq9pHv8wJsXBIQIT3nY8s16V0lmd6sXMjm0F8wg==
   dependencies:
     "@vuetify/loader-shared" "^1.7.0"
     debug "^4.3.3"
