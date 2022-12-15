@@ -7,7 +7,7 @@ export function useFilteredNavItems() {
   return computed(() => {
     return NavStore.items.filter((i) => {
       if (i.role === 'DEPRECATED') return false
-      if (i.role && AuthStore.user.permissions && !AuthStore.user.permissions.includes(i.role)) {
+      if (i.role && AuthStore.user?.permissions && !AuthStore.user.permissions.includes(i.role)) {
         return false
       }
       return true
