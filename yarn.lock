@@ -4972,10 +4972,10 @@ nuxi@3.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-nuxt-graphql-client@^0.2.23:
-  version "0.2.23"
-  resolved "https://registry.yarnpkg.com/nuxt-graphql-client/-/nuxt-graphql-client-0.2.23.tgz#7f05bb937add8f5b320a4a7530311e2c1b588c2e"
-  integrity sha512-+3DJIGYOTmR2JH5Rz95med53ZXM8KUnR6TKZ4DZ1K4D5Y2JuoxOc0bZfjIe7o/vFeF3qB8hr9TFdY+SjRkxFVQ==
+nuxt-graphql-client@^0.2.24:
+  version "0.2.24"
+  resolved "https://registry.yarnpkg.com/nuxt-graphql-client/-/nuxt-graphql-client-0.2.24.tgz#09556cc60f861f8021731a71704ed9139545a525"
+  integrity sha512-z5Xs2iVXHGFotD6gDa0zkAeI0Gecn297BQU8qHyvhMcDsAAo4+ArtwA6jkBf724edkdRhFd9RW7VzY6qBJcgAw==
   dependencies:
     "@graphql-codegen/cli" "npm:graphql-codegen-cli-nuxt@latest"
     "@graphql-codegen/typescript" "^2.8.3"
@@ -5921,10 +5921,10 @@ safe-buffer@~5.1.0, safe-buffer@~5.1.1:
   resolved "https://registry.npmjs.org/safer-buffer/-/safer-buffer-2.1.2.tgz"
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
-sass@^1.56.2:
-  version "1.56.2"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.56.2.tgz#9433b345ab3872996c82a53a58c014fd244fd095"
-  integrity sha512-ciEJhnyCRwzlBCB+h5cCPM6ie/6f8HrhZMQOf5vlU60Y1bI1rx5Zb0vlDZvaycHsg/MqFfF1Eq2eokAa32iw8w==
+sass@^1.57.1:
+  version "1.57.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.57.1.tgz#dfafd46eb3ab94817145e8825208ecf7281119b5"
+  integrity sha512-O2+LwLS79op7GI0xZ8fqzF7X2m/m8WFfI02dHOdsK5R2ECeS5F62zrwg/relM1rjSLy7Vd/DiMNIvPrQGsA0jw==
   dependencies:
     chokidar ">=3.0.0 <4.0.0"
     immutable "^4.0.0"
@@ -6802,10 +6802,10 @@ vue@^3.2.45:
     "@vue/server-renderer" "3.2.45"
     "@vue/shared" "3.2.45"
 
-vuetify@^3.0.5:
-  version "3.0.5"
-  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.5.tgz#f9dc3942ce81d7f00e3aabce23074df37a14705d"
-  integrity sha512-ciX+9XuHQ4zx27dEceHrs6xuCeqPgo91DhvCm+udbp0Qg95phad03uVcdHvyv1XW/stgdZGneiqg5dxQvLGzPw==
+vuetify@^3.0.6:
+  version "3.0.6"
+  resolved "https://registry.yarnpkg.com/vuetify/-/vuetify-3.0.6.tgz#83fe4fa7159d002acff9ca65cfabe4a67d64dc20"
+  integrity sha512-Illtc9t8PExlKqUEIivNNMpDif4/tvn+04ZEAwrxpQAG75x6V7oUFOF1kVKAFZ2ryuLnBpscXBR85GwFBmLeMQ==
 
 wcwidth@^1.0.1:
   version "1.0.1"
