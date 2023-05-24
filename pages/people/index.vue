@@ -10,13 +10,21 @@
         <v-text-field v-model="filter" label="Filter Namen oder Personalnummer" placeholder="Tipp zu filtern…" />
       </v-col>
     </v-row>
-    <v-row>
+    <v-row v-if="filteredPeople.length > 0">
       <v-col v-for="p in filteredPeople" :key="p._id" cols="12" sm="6" md="3">
         <v-card nuxt :to="'/people/' + p._id">
           <v-card-title>{{ `${p.vorname} ${p.nachname}` }}</v-card-title>
           <v-card-subtitle>
-            PN: {{ p.personalnummer }} ({{ p.myPeopleID }}) {{ p.myPeopleOrtID }} {{ p.kostenstelle }}
+            PN: {{ p.personalnummer }} ({{ p.myPeopleID }}) {{ p.myPeopleOrtID }} <br />
+            {{ p.position }}
           </v-card-subtitle>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row v-else>
+      <v-col cols="12" sm="6" md="3">
+        <v-card>
+          <v-card-title>Keine Mitarbeiter gefunden</v-card-title>
         </v-card>
       </v-col>
     </v-row>

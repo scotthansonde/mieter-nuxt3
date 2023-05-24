@@ -7,6 +7,7 @@ query getPeople {
     sortiername
     personalnummer
     kostenstelle
+    position
     myPeopleID
     myPeopleOrtID
   }
@@ -21,6 +22,8 @@ query getPersonById($_id: ID!) {
     vollername
     sortiername
     geburtsdatum
+    geschlecht
+    nationalitaet
     position
     eintrittsdatum
     austrittsdatum

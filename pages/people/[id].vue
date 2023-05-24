@@ -10,7 +10,7 @@
             </div>
             <div>
               Store:
-              {{ data?.getPersonById.kostenstelle }}
+              {{ data?.getPersonById.myPeopleOrtID }}
             </div>
             <div>Position: {{ data?.getPersonById.position }}</div>
             <div>
