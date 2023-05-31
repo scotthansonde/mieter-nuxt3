@@ -32,6 +32,7 @@
 </template>
 
 <script setup>
+definePageMeta({ middleware: 'auth' })
 const { data } = await useAsyncGql('getPeople')
 const filter = ref('')
 const filteredPeople = computed(() => {
