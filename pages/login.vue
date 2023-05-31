@@ -8,9 +8,9 @@
         <v-container>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <ClientOnly>
-              <GoogleLogin :callback="googleLoginCallback" />
-            </ClientOnly>
+            <div>
+              <v-btn color="red darken-1" text @click="signIn('google', { callbackUrl: '/' })">Sign In</v-btn>
+            </div>
           </v-card-actions>
         </v-container>
       </v-card-text>
@@ -19,19 +19,5 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '@/stores/AuthStore'
-import { useSnackbarStore } from '@/stores/SnackbarStore'
-const AuthStore = useAuthStore()
-const SnackbarStore = useSnackbarStore()
-
-const googleLoginCallback = async (response) => {
-  const accessToken = response.credential
-  useGqlToken(null)
-  const { data } = await useAsyncGql('authGoogle', { accessToken })
-  useGqlToken(data.value.authGoogle.token)
-  const { data: currentUser } = await useAsyncGql('getCurrentUser')
-  AuthStore.setUser({ ...currentUser.value.getCurrentUser })
-  SnackbarStore.setSnackbar('You have been logged in')
-  return navigateTo('/')
-}
+const { signIn } = useAuth()
 </script>

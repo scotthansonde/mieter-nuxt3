@@ -10,7 +10,9 @@
   },
   "devDependencies": {
     "@nuxtjs/google-fonts": "3.0.1",
-    "@types/node": "^18",
+    "@sidebase/nuxt-auth": "^0.5.0",
+    "@types/node": "^20",
+    "next-auth": "4.22.1",
     "nuxt": "^3.5.1"
   },
   "dependencies": {
@@ -21,6 +23,6 @@
     "sass": "^1.62.1",
     "vite-plugin-vuetify": "^1.0.2",
     "vue3-google-login": "^2.0.15",
-    "vuetify": "^3.3.0"
+    "vuetify": "^3.3.1"
   }
 }
