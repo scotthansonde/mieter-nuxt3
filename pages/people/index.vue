@@ -33,10 +33,10 @@
 
 <script setup>
 definePageMeta({ middleware: 'auth' })
-const { data } = await useAsyncGql('getPeople')
+const { data } = await useFetch('/api/people')
 const filter = ref('')
 const filteredPeople = computed(() => {
-  return data.value.getPeople.filter(
+  return data.value.filter(
     (person) =>
       person.vollername.toLowerCase().includes(filter.value.toLowerCase()) ||
       person.personalnummer.includes(filter.value)

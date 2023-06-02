@@ -4,11 +4,11 @@
     <v-app-bar-nav-icon v-else disabled />
     <v-toolbar-title>
       Development
-      <span v-if="db?.getDBHost"> (db:{{ db.getDBHost.dbHost }}) </span>
+      <span> {{ db?.dbHost }} </span>
     </v-toolbar-title>
     <v-spacer />
-    <div v-if="AuthStore.user?.username && status">
-      {{ AuthStore.user?.username }}
+    <div v-if="AuthStore.user?.name && status">
+      {{ AuthStore.user?.name }}
       <v-btn color="red darken-1" text @click="signOut({ callbackUrl: '/login' })">Sign Out</v-btn>
     </div>
     <div v-else>Not authenticated</div>
@@ -21,7 +21,7 @@ import { useAuthStore } from '@/stores/AuthStore'
 import { useNavStore } from '@/stores/NavStore'
 const AuthStore = useAuthStore()
 const NavStore = useNavStore()
-const { data: db } = await useAsyncGql('getDBHost')
+const { data: db } = await useFetch(`/api/dbHost`)
 </script>
 
 <style lang="scss" scoped></style>

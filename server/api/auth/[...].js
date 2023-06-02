@@ -1,9 +1,10 @@
 import { NuxtAuthHandler } from '#auth'
 import GoogleProvider from 'next-auth/providers/google'
-
+import User from '~~/server/models/User.js'
 const runtimeConfig = useRuntimeConfig()
 
 export default NuxtAuthHandler({
+  secret: runtimeConfig.NUXTAUTH_SECRET,
   pages: {
     // Change the default behavior to use `/login` as the path for the sign-in page
     signIn: '/login',
@@ -16,16 +17,25 @@ export default NuxtAuthHandler({
     }),
   ],
   callbacks: {
-    jwt: async ({ token, account }) => {
+    signIn: async ({ profile }) => {
+      const registeredUser = await User.findOne({ email: profile.email })
+      if (registeredUser) return true
+      return false
+    },
+    jwt: async ({ user, token, account }) => {
       const isSignIn = account ? true : false
+
       if (isSignIn) {
+        const registeredUser = await User.findOne({ email: user.email })
         token.accessToken = account ? account.id_token || '' : ''
+        token.permissions = registeredUser ? registeredUser.permissions || [] : []
       }
       return Promise.resolve(token)
     },
-    session: async ({ session, token, account }) => {
+    session: async ({ session, token }) => {
       // Send properties to the client, like an access_token and user id from a provider.
       session.accessToken = token.accessToken
+      session.user.permissions = token.permissions
       return Promise.resolve(session)
     },
   },

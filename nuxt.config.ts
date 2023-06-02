@@ -11,6 +11,7 @@ export default defineNuxtConfig({
   build: {
     transpile: ['vuetify'],
   },
+
   vite: {
     define: {
       'process.env.DEBUG': false,
@@ -19,6 +20,7 @@ export default defineNuxtConfig({
       noExternal: ['vuetify'], // add the vuetify vite plugin
     },
   },
+
   modules: [
     // @ts-ignore
     // this adds the vuetify vite plugin
@@ -27,20 +29,26 @@ export default defineNuxtConfig({
       nuxt.hooks.hook('vite:extendConfig', (config) => config.plugins.push(vuetify({ autoImport: true })))
     },
     '@pinia/nuxt',
-    'nuxt-graphql-client',
+    // 'nuxt-graphql-client',
     '@nuxtjs/google-fonts',
     '@sidebase/nuxt-auth',
   ],
 
+  nitro: {
+    plugins: ['@/server/db/index.ts'],
+  },
+
   runtimeConfig: {
     clientSecret: process.env.GOOGLE_SECRET,
+    MONGO_URI: process.env.DATABASE_URL,
+    NUXTAUTH_SECRET: process.env.NUXTAUTH_SECRET,
     public: {
-      GQL_HOST: 'http://localhost:4000', // overwritten by process.env.GQL_HOST
+      // GQL_HOST: 'http://localhost:4000', // overwritten by process.env.GQL_HOST
       clientId: process.env.GOOGLE_CLIENTID,
     },
   },
 
-  auth: { defaultProvider: 'google' },
+  auth: { defaultProvider: 'google', origin: process.env.NUXTAUTH_ORIGIN },
 
   googleFonts: {
     families: {
@@ -52,5 +60,9 @@ export default defineNuxtConfig({
     preload: false,
     download: false,
     base64: false,
+  },
+
+  devtools: {
+    enabled: true,
   },
 })

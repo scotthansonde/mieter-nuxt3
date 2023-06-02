@@ -3,18 +3,16 @@
     <v-row>
       <v-col>
         <v-card v-if="data">
-          <v-card-title>{{ data?.getPersonById.vollername }} </v-card-title>
+          <v-card-title>{{ data?.vollername }} </v-card-title>
           <v-card-subtitle>
-            <div>
-              Personalnummer: {{ data?.getPersonById.personalnummer }} (MyPeople: {{ data?.getPersonById.myPeopleID }})
-            </div>
+            <div>Personalnummer: {{ data?.personalnummer }} (MyPeople: {{ data?.myPeopleID }})</div>
             <div>
               Store:
-              {{ data?.getPersonById.myPeopleOrtID }}
+              {{ data?.myPeopleOrtID }}
             </div>
-            <div>Position: {{ data?.getPersonById.position }}</div>
+            <div>Position: {{ data?.position }}</div>
             <div>
-              {{ `${data?.getPersonById.strasse}, ${data?.getPersonById.plz} ${data?.getPersonById.ort} ` }}
+              {{ `${data?.strasse}, ${data?.plz} ${data?.ort} ` }}
             </div>
           </v-card-subtitle>
         </v-card>
@@ -31,7 +29,7 @@
 <script setup>
 const route = useRoute()
 const id = route.params.id
-const { data } = await useAsyncGql('getPersonById', { _id: id })
+const { data } = await useFetch(`/api/people/${id}`)
 </script>
 
 <style lang="scss" scoped></style>
