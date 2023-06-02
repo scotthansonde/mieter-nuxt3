@@ -29,7 +29,6 @@ export default defineNuxtConfig({
       nuxt.hooks.hook('vite:extendConfig', (config) => config.plugins.push(vuetify({ autoImport: true })))
     },
     '@pinia/nuxt',
-    // 'nuxt-graphql-client',
     '@nuxtjs/google-fonts',
     '@sidebase/nuxt-auth',
   ],
@@ -43,7 +42,6 @@ export default defineNuxtConfig({
     MONGO_URI: process.env.DATABASE_URL,
     NUXTAUTH_SECRET: process.env.NUXTAUTH_SECRET,
     public: {
-      // GQL_HOST: 'http://localhost:4000', // overwritten by process.env.GQL_HOST
       clientId: process.env.GOOGLE_CLIENTID,
     },
   },

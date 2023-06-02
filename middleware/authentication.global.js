@@ -5,7 +5,6 @@ export default defineNuxtRouteMiddleware(async (to, _from) => {
   const { status, data: session } = useAuth()
   const AuthStore = useAuthStore()
   const SnackbarStore = useSnackbarStore()
-  // const token = useCookie('gql:default')
 
   if (status.value !== 'authenticated') {
     if (AuthStore.user) {

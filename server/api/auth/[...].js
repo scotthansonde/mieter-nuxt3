@@ -27,14 +27,12 @@ export default NuxtAuthHandler({
 
       if (isSignIn) {
         const registeredUser = await User.findOne({ email: user.email })
-        token.accessToken = account ? account.id_token || '' : ''
         token.permissions = registeredUser ? registeredUser.permissions || [] : []
       }
       return Promise.resolve(token)
     },
     session: async ({ session, token }) => {
       // Send properties to the client, like an access_token and user id from a provider.
-      session.accessToken = token.accessToken
       session.user.permissions = token.permissions
       return Promise.resolve(session)
     },
