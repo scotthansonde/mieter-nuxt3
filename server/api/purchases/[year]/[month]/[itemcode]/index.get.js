@@ -4,9 +4,7 @@ import Person from '~~/server/models/People.js'
 
 export default defineEventHandler(async (event) => {
   // set static params for now
-  const itemName = 'SCHU'
-  const year = 2023
-  const month = 5
+  const { year, month, itemcode } = event.context.params
 
   // get fields in schema
   const productFields = Object.keys(Product.schema.paths).join(' ')
@@ -16,7 +14,7 @@ export default defineEventHandler(async (event) => {
   // code from resolver
   const lastOfMonth = new Date(Date.UTC(year, month, 0))
   const lastOfPreviousMonth = new Date(Date.UTC(year, month - 1, 0))
-  const item = await Product.findOne({ name: itemName }).select(productFields).lean()
+  const item = await Product.findOne({ name: itemcode }).select(productFields).lean()
   if (!item) return []
   const purchases = await Purchase.find({
     $and: [{ item: item._id }, { bookingDate: { $lte: lastOfMonth } }, { bookingDate: { $gt: lastOfPreviousMonth } }],
