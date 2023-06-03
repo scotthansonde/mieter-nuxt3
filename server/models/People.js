@@ -1,9 +1,9 @@
-import mongoose from 'mongoose'
+import { Schema, model } from 'mongoose'
 import mongooseLeanVirtuals from 'mongoose-lean-virtuals'
 
 // We use German field names here because the source table has German columns
 
-const personSchema = new mongoose.Schema(
+const personSchema = new Schema(
   {
     personalnummer: String,
     nachname: { type: String, required: 'You must supply nachname' },
@@ -72,4 +72,4 @@ personSchema.plugin(mongooseLeanVirtuals)
 //   foreignField: 'buyer',
 // });
 
-export default mongoose.model('Person', personSchema)
+export default model('Person', personSchema)

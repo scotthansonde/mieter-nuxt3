@@ -1,7 +1,7 @@
-import mongoose from 'mongoose'
+import { Schema, model } from 'mongoose'
 // const md5 = require('md5');
 
-const V2UserSchema = new mongoose.Schema({
+const V2UserSchema = new Schema({
   username: {
     type: String,
     required: true,
@@ -32,4 +32,4 @@ const V2UserSchema = new mongoose.Schema({
   },
 })
 
-export default mongoose.model('V2User', V2UserSchema)
+export default model('V2User', V2UserSchema)
