@@ -24,9 +24,9 @@
                 {{ p.buyer.sortiername }}
               </td>
               <td>{{ p.buyer.lohnkost }}</td>
-              <td>{{ p.purchaseDate.split('T')[0] }}</td>
-              <td>{{ p.bookingDate.split('T')[0] }}</td>
-              <td>{{ formatEuro(p.price / 100) }}</td>
+              <td>{{ useDate(p.purchaseDate) }}</td>
+              <td>{{ useDate(p.bookingDate) }}</td>
+              <td>{{ useEuro(p.price / 100) }}</td>
               <td>{{ p.note }}</td>
               <!--              <td>
                 <ShoesCheckbox :id="p._id" type="RDS" :value="p.isInRDS" />
@@ -67,12 +67,6 @@ definePageMeta({ middleware: 'auth' })
 const route = useRoute()
 const { year, month } = route.params
 const { data } = await useFetch(`/api/purchases/${year}/${month}/SCHU`)
-const formatEuro = (num) => {
-  return new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR',
-  }).format(num)
-}
 </script>
 
 <style lang="scss" scoped></style>
