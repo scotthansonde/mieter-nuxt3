@@ -22,5 +22,11 @@ export default defineEventHandler(async (event) => {
     .populate({ path: 'buyer', select: personFields })
     .select(purchaseFields)
     .lean({ virtuals: true })
+  // sort by buyer name
+  purchases.sort((a, b) => {
+    if (a.buyer.sortiername > b.buyer.sortiername) return 1
+    if (a.buyer.sortiername < b.buyer.sortiername) return -1
+    return 0
+  })
   return purchases
 })
