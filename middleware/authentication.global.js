@@ -1,22 +1,21 @@
 import { useAuthStore } from '@/stores/AuthStore'
-import { useSnackbarStore } from '@/stores/SnackbarStore'
+// import { useSnackbarStore } from '@/stores/SnackbarStore'
 
 export default defineNuxtRouteMiddleware(async (to, _from) => {
   const { status, data: session } = useAuth()
   const AuthStore = useAuthStore()
-  const SnackbarStore = useSnackbarStore()
+  // const SnackbarStore = useSnackbarStore()
 
   if (status.value !== 'authenticated') {
     if (AuthStore.user) {
       AuthStore.setUser(null)
-      SnackbarStore.setSnackbar('You have been signed out')
+      // SnackbarStore.setSnackbar('You have been signed out')
     }
     return
   } else {
     if (!AuthStore.user) {
-      // const { data: currentUser } = await useAsyncGql('getCurrentUser')
       AuthStore.setUser({ ...session?.value?.user })
-      SnackbarStore.setSnackbar('You have been signed in')
+      // SnackbarStore.setSnackbar('You have been signed in')
     }
     return
   }
