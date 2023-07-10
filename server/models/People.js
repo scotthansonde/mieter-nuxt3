@@ -43,6 +43,10 @@ personSchema.virtual('kostenstelle').get(function () {
   return this.lohnkost ? this.lohnkost : this.vertragkost
 })
 
+personSchema.virtual('active').get(function () {
+  return !this.austrittsdatum
+})
+
 personSchema.virtual('mandat').get(function () {
   const mandaten = {
     51252: '70',
