@@ -11,13 +11,16 @@
       </v-col>
     </v-row>
     <v-row v-if="filteredPeople.length > 0">
-      <v-col v-for="p in filteredPeople" :key="p._id" cols="12" sm="6" md="3">
-        <v-card nuxt :to="'/people/' + p._id">
+      <v-col v-for="p in filteredPeople" v-show="p.active || filter.length > 2" :key="p._id" cols="12" sm="6" md="3">
+        <v-card nuxt :to="'/people/' + p._id" :color="p.active ? '' : 'pink'">
           <v-card-title>{{ `${p.vorname} ${p.nachname}` }}</v-card-title>
-          <v-card-subtitle>
-            PN: {{ p.personalnummer }} ({{ p.myPeopleID }}) {{ p.myPeopleOrtID }} <br />
-            {{ p.position }}
-          </v-card-subtitle>
+          <v-card-text>
+            PN: {{ p.personalnummer }}
+            <span v-show="p.myPeopleID">{{ `(${p.myPeopleID})` }}</span>
+            {{ p.myPeopleOrtID }} <br />
+            {{ p.position }} - Eintritt: {{ useDate(p.eintrittsdatum) }}
+            <span v-if="!p.active"><br />Inaktiv - Austritt: {{ useDate(p.austrittsdatum) }}</span>
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -33,7 +36,7 @@
 
 <script setup>
 definePageMeta({ middleware: 'auth' })
-const { data } = await useFetch('/api/people')
+const { data } = await useFetch('/api/people?filter=all')
 const filter = ref('')
 const filteredPeople = computed(() => {
   return data.value.filter(
