@@ -2,19 +2,24 @@
   <v-container>
     <v-row>
       <v-col>
-        <v-card v-if="data">
+        <v-card v-if="data" :color="data?.active ? '' : 'pink'">
           <v-card-title>{{ data?.vollername }} </v-card-title>
-          <v-card-subtitle>
-            <div>Personalnummer: {{ data?.personalnummer }} (MyPeople: {{ data?.myPeopleID }})</div>
+          <v-card-text>
+            <div>
+              Personalnummer: {{ data?.personalnummer }}
+              <span v-show="data?.myPeopleID">(MyPeople: {{ data?.myPeopleID }})</span>
+            </div>
             <div>
               Store:
-              {{ data?.myPeopleOrtID }}
+              {{ data?.myPeopleOrtID || `nicht erfasst` }}
             </div>
             <div>Position: {{ data?.position }}</div>
-            <div>
+            <div>Eintritt: {{ useDate(data?.eintrittsdatum) }}</div>
+            <div v-if="!data.active">Austritt: {{ useDate(data?.austrittsdatum) }}</div>
+            <div class="mt-2">
               {{ `${data?.strasse}, ${data?.plz} ${data?.ort} ` }}
             </div>
-          </v-card-subtitle>
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
