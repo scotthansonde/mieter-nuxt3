@@ -6,5 +6,5 @@ export const useEuro = (num) => {
 }
 
 export const useDate = (date) => {
-  return date.split('T')[0]
+  return date?.split('T')[0]
 }
