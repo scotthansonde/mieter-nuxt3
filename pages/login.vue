@@ -9,7 +9,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <div>
-              <v-btn color="red darken-1" text @click="signIn('google', { callbackUrl: '/' })">Sign In</v-btn>
+              <v-btn color="red darken-1" text @click="GoogleSignIn">Sign In</v-btn>
             </div>
           </v-card-actions>
         </v-container>
@@ -20,4 +20,12 @@
 
 <script setup>
 const { signIn } = useAuth()
+async function GoogleSignIn() {
+  const { error } = await signIn('google', { callbackUrl: '/' })
+  if (error) {
+    console.log(error)
+  } else {
+    return navigateTo('/', { external: true })
+  }
+}
 </script>
