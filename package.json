@@ -19,6 +19,7 @@
   "dependencies": {
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
+    "dayjs": "^1.11.9",
     "mongoose": "^7.3.4",
     "mongoose-lean-virtuals": "^0.9.1",
     "roboto-fontface": "^0.10.0",
