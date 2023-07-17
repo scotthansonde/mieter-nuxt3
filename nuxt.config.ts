@@ -41,6 +41,8 @@ export default defineNuxtConfig({
     clientSecret: process.env.GOOGLE_SECRET,
     MONGO_URI: process.env.DATABASE_URL,
     NUXTAUTH_SECRET: process.env.NUXTAUTH_SECRET,
+    WEBCOCKPIT_USER: process.env.WEBCOCKPIT_USER,
+    WEBCOCKPIT_PASSWORD: process.env.WEBCOCKPIT_PASSWORD,
     public: {
       clientId: process.env.GOOGLE_CLIENTID,
     },
