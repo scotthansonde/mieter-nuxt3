@@ -26,8 +26,8 @@ export default defineEventHandler(async (event) => {
     body: `{"Period":{"start":"${startDate}","end":"${endDate}"},"Restaurants":[780,484,1400,779,483],"IncludeExported":true,"IncludeNotExported":true,"IncludeRdsEntries":false,"IncludeReflexisEntries":true,"ShowEarnCodesOnly":false,"HidePreviousMonths":true,"IncludeEmployeeMealsRds":true,"IncludeMeinDienstplanEntries":false,"EnableFactorGrouping":false,"SortType":2}`,
     method: 'POST',
   })
-
+  console.log(response)
   const data = await response.json()
-  console.log(data)
+
   return data
 })
