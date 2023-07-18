@@ -17,6 +17,7 @@ export default defineEventHandler(async (event) => {
   const startDate = queryParams.startDate
   const endDate = queryParams.endDate
   const login = await loginWebcockpit()
+  console.log(login)
   const response = await fetch('https://www.webcockpit.app/api/Payroll/getPayrollTransactionsData', {
     headers: {
       accept: 'application/json, text/plain, */*',
