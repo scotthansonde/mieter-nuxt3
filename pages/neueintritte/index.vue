@@ -109,6 +109,8 @@ async function getWorkspaceList() {
     if (!PDF) {
       withoutPDF.push(`${p.personalnummer} ${p.vollername} ${p.kostenstelle} hat keine SV-Meldung!`)
     } else {
+      const i = pdfFiles.findIndex((f) => f.name === PDF)
+      pdfFiles[i].hasHours = true
       info.value += `<li>PDF für ${p.personalnummer} gefunden: "${PDF}"</li>`
     }
   }
@@ -116,6 +118,12 @@ async function getWorkspaceList() {
   info.value += '<ul>'
   for (const e of withoutPDF) info.value += `<li><strong>${e}</strong></li>`
   info.value += '</ul>'
+  for (const f of pdfFiles) {
+    if (!f.hasHours) {
+      info.value += `<p>Noch keine Stunden: ${f.name}</p>`
+    }
+  }
+
   info.value += '<p></p><p>Betreffzeile für die Mail:<br />'
   info.value += `PHKG - CREW – ${today.format('MM/YYYY')} – Lohndaten + ${pdfNames.length} Neueintritte</p>`
 }

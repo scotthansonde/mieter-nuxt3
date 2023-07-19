@@ -47,6 +47,12 @@ export const useNavStore = defineStore('NavStore', {
           role: 'DEPRECATED',
         },
         {
+          icon: 'mdi-account-star',
+          title: 'Neueintritte',
+          to: '/neueintritte',
+          color: 'green',
+        },
+        {
           icon: 'mdi-washing-machine',
           title: 'Wäschegeld',
           to: '/waeschegeld',

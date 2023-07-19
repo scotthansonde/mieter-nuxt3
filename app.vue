@@ -19,6 +19,9 @@
 </template>
 <style>
 ul {
-  padding-left: 3rem;
+  padding-left: 24px;
+}
+p {
+  margin-bottom: 16px;
 }
 </style>
