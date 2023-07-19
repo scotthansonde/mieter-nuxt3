@@ -17,3 +17,8 @@
     </ClientOnly>
   </v-layout>
 </template>
+<style>
+ul {
+  padding-left: 3rem;
+}
+</style>

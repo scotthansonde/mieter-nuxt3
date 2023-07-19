@@ -31,6 +31,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
     '@sidebase/nuxt-auth',
+    '@vueuse/nuxt',
   ],
 
   nitro: {
@@ -43,6 +44,7 @@ export default defineNuxtConfig({
     NUXTAUTH_SECRET: process.env.NUXTAUTH_SECRET,
     WEBCOCKPIT_USER: process.env.WEBCOCKPIT_USER,
     WEBCOCKPIT_PASSWORD: process.env.WEBCOCKPIT_PASSWORD,
+    CREDENTIALS: process.env.CREDENTIALS,
     public: {
       clientId: process.env.GOOGLE_CLIENTID,
     },

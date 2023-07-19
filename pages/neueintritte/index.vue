@@ -5,9 +5,7 @@
         <h1>Neueintritte Crew</h1>
         <p>
           Hier wird geprüft ob in
-          <a rel="noreferrer" href="https://drive.google.com/drive/folders/1eJjvWugBMNfEtPx_PnroUFRlFe5gTLKX">
-            Google Drive
-          </a>
+          <a href="https://drive.google.com/drive/folders/1eJjvWugBMNfEtPx_PnroUFRlFe5gTLKX">Google Drive</a>
           SV-Meldungen für alle Mitarbeiter vorhanden sind, die in WebCockpit Lohntransaktionen für den aktuellen Monat
           haben und
         </p>
@@ -41,6 +39,8 @@ definePageMeta({ middleware: 'auth' })
 const info = ref('')
 const error1 = ref(false)
 const loading1 = ref(false)
+
+const folderID = '1eJjvWugBMNfEtPx_PnroUFRlFe5gTLKX'
 const { data } = await useFetch('/api/people?filter=all')
 const getPeople = data.value
 
@@ -58,31 +58,65 @@ async function getWorkspaceList() {
   const endDate = yesterday.format().split('T')[0]
 
   info.value += `<p>Suche Lohntransaktionen in WebCockpit ${startDate} bis ${endDate}... </p>`
-  let { data } = await useFetch(`/api/webcockpit?startDate=${startDate}&endDate=${endDate}`)
+  const { data } = await useFetch(`/api/webcockpit?startDate=${startDate}&endDate=${endDate}`)
+  loading1.value = false
   const lohnEntries = data.value.item.jobCodes
-  info.value += `<p>${lohnEntries.length} Einträge gefunden</p>`
+  info.value += `<p>${lohnEntries.length} Einträge gefunden… `
   const lohnPNs = new Set(lohnEntries.map((e) => e.employee.id))
-  info.value += `<p>${lohnPNs.size} PNs sind einmalig</p>`
+  info.value += `${lohnPNs.size} PNs sind einmalig</p>`
 
   const neuInCornerstone = getPeople.filter((p) => p.eintrittsdatum?.includes(thisMonthString))
   const neuInCornerstonePNs = neuInCornerstone.map((p) => p.personalnummer)
   const cornerstonePNs = getPeople.map((p) => p.personalnummer)
 
   const newPeople = []
-  info.value += '<ul>'
   for (const p of lohnPNs) {
     if (neuInCornerstonePNs.includes(p.toString())) {
       const c = getPeople.find((e) => e.personalnummer === p.toString())
       newPeople.push(c)
-      info.value += `<li>${p} ${c.vollername} ist im ${thisMonthString} eingetreten</li>`
-    } else if (!cornerstonePNs.includes(p.toString())) {
-      // this.info += `<li>${p} ist nicht in Cornerstone</li>`
-      // const c = this.getPeople.find((e) => e.personalnummer === p.toString())
-      // newPeople.push(c)
     }
+  }
+
+  info.value += `<p>${newPeople.length} Neueintritte im ${thisMonthString}</p>`
+  info.value += '<ul>'
+  for (const p of newPeople) {
+    info.value += `<li>${p.personalnummer} ${p.vollername} (${p.myPeopleOrtID})</li>`
   }
   info.value += '</ul>'
 
-  loading1.value = false
+  info.value += `<p></p><p>Suche Google Drive Ordner ${thisMonthString}... `
+  const { data: googleFolders } = await useFetch(`/api/workspace?folderID=${folderID}`)
+  const folders = googleFolders.value.data.files.filter((f) => f.mimeType.includes('vnd.google-apps.folder'))
+  const folder = folders.find((f) => f.name === yesterday.format('YYYY-MM'))
+
+  if (!folder) {
+    info.value += 'nicht gefunden. Bitte in Google Drive prüfen</p>'
+    return
+  }
+  info.value += 'gefunden.</p>'
+  info.value += `<p>Suche PDF Dateien in ${thisMonthString}... `
+  const { data: googlePdfs } = await useFetch(`/api/workspace?folderID=${folder.id}`)
+  const pdfFiles = googlePdfs.value.data.files.filter((f) => f.mimeType.includes('pdf'))
+  const pdfNames = pdfFiles.map((f) => f.name)
+  info.value += `${pdfNames.length} Dateien gefunden</p>`
+
+  const withoutPDF = []
+  info.value += '<ul>'
+  for (const p of newPeople) {
+    const PDF = pdfNames.find((n) => {
+      return n.includes(p.personalnummer)
+    })
+    if (!PDF) {
+      withoutPDF.push(`${p.personalnummer} ${p.vollername} ${p.kostenstelle} hat keine SV-Meldung!`)
+    } else {
+      info.value += `<li>PDF für ${p.personalnummer} gefunden: "${PDF}"</li>`
+    }
+  }
+  info.value += '</ul><p></p>'
+  info.value += '<ul>'
+  for (const e of withoutPDF) info.value += `<li><strong>${e}</strong></li>`
+  info.value += '</ul>'
+  info.value += '<p></p><p>Betreffzeile für die Mail:<br />'
+  info.value += `PHKG - CREW – ${today.format('MM/YYYY')} – Lohndaten + ${pdfNames.length} Neueintritte</p>`
 }
 </script>
