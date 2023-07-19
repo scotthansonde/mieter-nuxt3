@@ -20,11 +20,11 @@
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
     "dayjs": "^1.11.9",
-    "mongoose": "^7.3.4",
+    "mongoose": "^7.4.0",
     "mongoose-lean-virtuals": "^0.9.1",
     "roboto-fontface": "^0.10.0",
     "sass": "^1.63.6",
     "vite-plugin-vuetify": "^1.0.2",
-    "vuetify": "^3.3.8"
+    "vuetify": "^3.3.9"
   }
 }
