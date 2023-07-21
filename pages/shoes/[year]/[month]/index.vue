@@ -1,66 +1,63 @@
 <template>
   <v-container>
     <InnerYearMonthNavbar />
-    <v-container v-if="data">
-      <v-row>
-        <v-table ref="myTable" density="compact" class="text-body-2">
-          <template #default>
-            <thead>
-              <tr>
-                <th></th>
-                <th>PN</th>
-                <th>Name</th>
-                <th>Store</th>
-                <th>Rechnungsdatum</th>
-                <th>Datum Lohn</th>
-                <th>Preis</th>
-                <th>Notiz</th>
-                <th></th>
+    <v-container v-if="purchases">
+      <v-table ref="myTable" density="compact" class="text-body-2 mb-2">
+        <template #default>
+          <thead>
+            <tr>
+              <th></th>
+              <th>PN</th>
+              <th>Name</th>
+              <th>Store</th>
+              <th>Rechnungsdatum</th>
+              <th>Preis</th>
+              <th>Notiz</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <template v-for="s in MainStore.restaurants">
+              <tr v-if="restaurantItems(s).length" :key="s.shortname" :class="textColor(s)">
+                <td colspan="12">{{ s.shortname }}</td>
               </tr>
-            </thead>
-            <tbody>
-              <template v-for="s in MainStore.restaurants">
-                <tr v-if="restaurantItems(s).length" :key="s.shortname" :class="textColor(s)">
-                  <td colspan="12">{{ s.shortname }}</td>
-                </tr>
 
-                <tr v-for="p in restaurantItems(s)" :key="p._id">
-                  <td></td>
-                  <td :class="textColor(s)">
-                    {{ p.buyer.personalnummer }}
-                  </td>
-                  <td :class="textColor(s)">
-                    {{ p.buyer.sortiername }}
-                  </td>
-                  <td>{{ p.buyer.lohnkost }}</td>
-                  <td>{{ useDate(p.purchaseDate) }}</td>
-                  <td>{{ useDate(p.bookingDate) }}</td>
-                  <td class="text-right">{{ useEuro(p.price / 100) }}</td>
-                  <td>{{ p.note }}</td>
-                  <td>
-                    <v-icon small @click.stop="editItem(p)"> mdi-pencil </v-icon>
-                    <ShoeForm v-model="showShoeForm" :purchase="purchase" />
-                  </td>
-                </tr>
-                <!-- <tr v-if="itemsFiltered(s).length" :key="s.shortname + '1'">
+              <tr v-for="p in restaurantItems(s)" :key="p._id">
+                <td></td>
+                <td :class="textColor(s)">
+                  {{ p.buyer.personalnummer }}
+                </td>
+                <td :class="textColor(s)">
+                  {{ p.buyer.sortiername }}
+                </td>
+                <td>{{ p.buyer.lohnkost }}</td>
+                <td>{{ useDate(p.purchaseDate) }}</td>
+                <td class="text-right">{{ useEuro(p.price / 100) }}</td>
+                <td>{{ p.note }}</td>
+                <td>
+                  <v-icon small @click.stop="editItem(p)"> mdi-pencil </v-icon>
+                  <ShoeForm v-model="showShoeForm" :purchase="purchase" />
+                </td>
+              </tr>
+              <tr v-if="restaurantItems(s).length" :key="s.shortname + '1'">
                 <td :class="textColor(s)" class="text-right" colspan="5">Subtotal {{ s.shortname }}:</td>
                 <td class="text-right">
-                  {{ $formatEuros(totalPayments(itemsFiltered(s))) }}
+                  {{ useEuro(totalPayments(restaurantItems(s)) / 100) }}
                 </td>
                 <td colspan="7"></td>
-              </tr> -->
+              </tr>
+            </template>
 
-                <!-- <tr>
-            <td class="pink--text">Total:</td>
-            <td class="text-right" colspan="5">
-              {{ $formatEuros(totalAllPayments) }}
-            </td>
-          </tr> -->
-              </template>
-            </tbody>
-          </template>
-        </v-table>
-      </v-row>
+            <tr>
+              <td class="pink--text">Total:</td>
+              <td class="text-right" colspan="5">
+                {{ useEuro(totalAllPayments / 100) }}
+              </td>
+            </tr>
+          </tbody>
+        </template>
+      </v-table>
+
       <v-row>
         <v-col>
           <!-- <PdfTableButtons table="table" :title="`Schuhe ${$_dateTitleString}`" /> -->
@@ -83,14 +80,22 @@ import { useMainStore } from '@/stores/MainStore'
 const MainStore = useMainStore()
 const route = useRoute()
 const { year, month } = route.params
-const { data } = await useFetch(`/api/purchases/${year}/${month}/SCHU`)
+const { data: purchases } = await useFetch(`/api/purchases/${year}/${month}/SCHU`)
 const purchase = ref({})
 const showShoeForm = ref(false)
 
+const totalAllPayments = computed(() => {
+  if (!purchases) return 0
+  return purchases.value.reduce((ac, next) => ac + +next.price, 0)
+})
 const restaurantItems = (p) => {
-  if (data) {
-    return data.value.filter((r) => r.buyer.lohnkost === p.number)
+  if (purchases) {
+    return purchases.value.filter((r) => r.buyer.lohnkost === p.number)
   }
+}
+
+const totalPayments = (purchases) => {
+  return purchases.reduce((ac, next) => ac + +next.price, 0)
 }
 
 const editItem = (item) => {
