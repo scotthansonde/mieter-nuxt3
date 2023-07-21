@@ -36,7 +36,6 @@
                 <td>{{ p.note }}</td>
                 <td>
                   <v-icon small @click.stop="editItem(p)"> mdi-pencil </v-icon>
-                  <ShoeForm v-model="showShoeForm" :purchase="purchase" />
                 </td>
               </tr>
               <tr v-if="restaurantItems(s).length" :key="s.shortname + '1'">
@@ -49,29 +48,30 @@
             </template>
 
             <tr>
-              <td class="pink--text">Total:</td>
+              <td>Total:</td>
               <td class="text-right" colspan="5">
                 {{ useEuro(totalAllPayments / 100) }}
               </td>
             </tr>
           </tbody>
+          <ShoeForm v-model="showShoeForm" :purchase="purchase" />
         </template>
       </v-table>
 
       <v-row>
         <v-col>
           <!-- <PdfTableButtons table="table" :title="`Schuhe ${$_dateTitleString}`" /> -->
-          <v-btn color="secondary" class="mb-2">Show PDF</v-btn>
-          <v-btn color="primary" class="mb-2">Save PDF</v-btn>
+          <v-btn color="secondary">Show PDF</v-btn>
+          <v-btn color="primary">Save PDF</v-btn>
         </v-col>
         <v-spacer></v-spacer>
         <v-col class="text-right">
           <v-btn color="primary" @click.stop="createItem"> Neue Schuhrechnung </v-btn>
-          <ShoeForm v-model="showShoeForm" :purchase="purchase" />
         </v-col>
       </v-row>
     </v-container>
   </v-container>
+  <ShoeForm v-model="showShoeForm" :purchase="purchase" />
 </template>
 
 <script setup>
@@ -98,16 +98,18 @@ const totalPayments = (purchases) => {
   return purchases.reduce((ac, next) => ac + +next.price, 0)
 }
 
+const createItem = () => {
+  purchase.value = {}
+  showShoeForm.value = true
+}
+
 const editItem = (item) => {
   purchase.value = Object.assign({}, item)
   purchase.value.buyerID = item.buyer._id
   purchase.value.itemID = item.item._id
+  purchase.value.purchaseDate = useDate(item.purchaseDate)
   showShoeForm.value = true
   console.log(purchase.value)
-}
-
-const createItem = () => {
-  console.log('createItem')
 }
 
 const textColor = (store) => {
