@@ -13,7 +13,15 @@
           <v-container>
             <v-row>
               <v-col v-if="isNew" cols="12">
-                <v-text-field v-model="editedPurchase.buyerID" label="Mitarbeiter aussuchen" required></v-text-field>
+                <v-autocomplete
+                  v-if="getPeople && getPeople.length > 0"
+                  v-model="editedPurchase.buyerID"
+                  :items="getPeople"
+                  item-value="_id"
+                  item-title="pnSortiername"
+                  label="Mitarbeiter aussuchen*"
+                  required
+                ></v-autocomplete>
               </v-col>
 
               <v-col cols="8" sm="4">
@@ -62,8 +70,9 @@ const props = defineProps({
     },
   },
 })
+const { data: getPeople } = await useFetch('/api/people?filter=active')
+const { data: lastInvoice } = await useFetch('/api/purchases/invoice')
 
-// const dialog = ref('false')
 const editedPurchase = ref()
 const emptyPurchase = {
   itemID: '599150e061432c3facf818bb',
@@ -78,8 +87,13 @@ const isNew = computed(() => {
 })
 
 watchEffect(() => {
-  if (Object.keys(props.purchase).length === 0) editedPurchase.value = emptyPurchase
-  else editedPurchase.value = { ...props.purchase }
+  if (Object.keys(props.purchase).length === 0) {
+    const digits = parseInt(lastInvoice.value.invoiceNumber.match(/\d+/)[0])
+    emptyPurchase.note = `S-${digits + 1}`
+    editedPurchase.value = emptyPurchase
+  } else {
+    editedPurchase.value = { ...props.purchase }
+  }
 })
 
 const closeDialog = () => {
@@ -97,5 +111,6 @@ const onSave = () => {
   }
   if (!isNew) variables.purchaseID = editedPurchase.value._id
   console.log(variables)
+  emit('closeForm')
 }
 </script>

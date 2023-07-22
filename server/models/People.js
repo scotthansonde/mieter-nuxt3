@@ -35,6 +35,10 @@ personSchema.virtual('sortiername').get(function () {
   return `${this.nachname}, ${this.vorname}`
 })
 
+personSchema.virtual('pnSortiername').get(function () {
+  return `${this.personalnummer} ${this.nachname}, ${this.vorname}`
+})
+
 personSchema.virtual('vollername').get(function () {
   return `${this.vorname} ${this.nachname}`
 })
