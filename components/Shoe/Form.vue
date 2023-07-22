@@ -100,7 +100,7 @@ const closeDialog = () => {
   emit('closeForm')
 }
 
-const onSave = () => {
+const onSave = async () => {
   const variables = {
     buyerID: editedPurchase.value.buyerID,
     itemID: editedPurchase.value.itemID,
@@ -111,6 +111,14 @@ const onSave = () => {
   }
   if (!isNew) variables.purchaseID = editedPurchase.value._id
   console.log(variables)
+  if (isNew) {
+    const { data: newInvoice } = await useFetch('/api/purchases/invoice', {
+      method: 'POST',
+      body: { invoiceNumber: variables.note },
+    })
+    const digits = parseInt(newInvoice.value.invoiceNumber.match(/\d+/)[0])
+    emptyPurchase.note = `S-${digits + 1}`
+  }
   emit('closeForm')
 }
 </script>
