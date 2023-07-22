@@ -54,7 +54,6 @@
               </td>
             </tr>
           </tbody>
-          <ShoeForm v-model="showShoeForm" :purchase="purchase" />
         </template>
       </v-table>
 

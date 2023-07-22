@@ -31,7 +31,7 @@
 
               <v-col cols="8" sm="4">
                 <!-- <v-currency-field v-model="editedPurchase.price" label="Preis" suffix="€"></v-currency-field> -->
-                <v-text-field v-model="editedPurchase.price" label="Preis" suffix="€"></v-text-field>
+                <currency-input v-model="editedPurchase.price" label="Preis" />
               </v-col>
               <v-col cols="8" sm="4">
                 <v-text-field v-model="editedPurchase.note" label="Notiz"></v-text-field>
@@ -79,7 +79,7 @@ const isNew = computed(() => {
 
 watchEffect(() => {
   if (Object.keys(props.purchase).length === 0) editedPurchase.value = emptyPurchase
-  else editedPurchase.value = props.purchase
+  else editedPurchase.value = { ...props.purchase }
 })
 
 const onSave = () => {
