@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="800px">
+  <v-dialog max-width="800px">
     <v-card>
       <v-form @submit.prevent="onSave">
         <v-toolbar dense flat>
@@ -40,10 +40,10 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn v-if="!isNew" color="red darken-1"> Delete </v-btn>
+          <v-btn v-if="!isNew" color="error" variant="elevated"> Delete </v-btn>
           <v-spacer></v-spacer>
-          <v-btn color="red darken-1"> Cancel </v-btn>
-          <v-btn color="blue darken-1" type="submit"> Submit </v-btn>
+          <v-btn color="secondary" variant="elevated" @click="closeDialog"> Cancel </v-btn>
+          <v-btn color="primary" variant="elevated" type="submit"> Submit </v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
@@ -52,8 +52,8 @@
 </template>
 
 <script setup>
+const emit = defineEmits(['closeForm'])
 const props = defineProps({
-  value: Boolean,
   purchase: {
     type: Object,
     required: false,
@@ -63,7 +63,7 @@ const props = defineProps({
   },
 })
 
-const dialog = ref(false)
+// const dialog = ref('false')
 const editedPurchase = ref()
 const emptyPurchase = {
   itemID: '599150e061432c3facf818bb',
@@ -82,7 +82,20 @@ watchEffect(() => {
   else editedPurchase.value = { ...props.purchase }
 })
 
+const closeDialog = () => {
+  emit('closeForm')
+}
+
 const onSave = () => {
-  console.log('onSave')
+  const variables = {
+    buyerID: editedPurchase.value.buyerID,
+    itemID: editedPurchase.value.itemID,
+    purchaseDate: editedPurchase.value.purchaseDate,
+    bookingDate: editedPurchase.value.bookingDate,
+    price: editedPurchase.value.price,
+    note: editedPurchase.value.note,
+  }
+  if (!isNew) variables.purchaseID = editedPurchase.value._id
+  console.log(variables)
 }
 </script>

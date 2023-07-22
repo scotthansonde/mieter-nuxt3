@@ -60,8 +60,8 @@
       <v-row>
         <v-col>
           <!-- <PdfTableButtons table="table" :title="`Schuhe ${$_dateTitleString}`" /> -->
-          <v-btn color="secondary">Show PDF</v-btn>
-          <v-btn color="primary">Save PDF</v-btn>
+          <v-btn color="primary" class="mr-2">Show PDF</v-btn>
+          <v-btn color="success">Save PDF</v-btn>
         </v-col>
         <v-spacer></v-spacer>
         <v-col class="text-right">
@@ -70,7 +70,7 @@
       </v-row>
     </v-container>
   </v-container>
-  <ShoeForm v-model="showShoeForm" :purchase="purchase" />
+  <ShoeForm v-model="showShoeForm" :purchase="purchase" @close-form="closeShoeForm" />
 </template>
 
 <script setup>
@@ -108,8 +108,9 @@ const editItem = (item) => {
   purchase.value.itemID = item.item._id
   purchase.value.purchaseDate = useDate(item.purchaseDate)
   showShoeForm.value = true
-  console.log(purchase.value)
 }
+
+const closeShoeForm = () => (showShoeForm.value = false)
 
 const textColor = (store) => {
   return `text-${store.color}`
