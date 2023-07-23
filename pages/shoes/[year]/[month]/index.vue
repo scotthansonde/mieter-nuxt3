@@ -78,7 +78,7 @@ import { useMainStore } from '@/stores/MainStore'
 const MainStore = useMainStore()
 const route = useRoute()
 const { year, month } = route.params
-const { data: purchases } = await useFetch(`/api/purchases/${year}/${month}/SCHU`)
+const { data: purchases, refresh } = await useFetch(`/api/purchases/${year}/${month}/SCHU`)
 const purchase = ref({})
 const showShoeForm = ref(false)
 
@@ -109,7 +109,10 @@ const editItem = (item) => {
   showShoeForm.value = true
 }
 
-const closeShoeForm = () => (showShoeForm.value = false)
+const closeShoeForm = () => {
+  refresh()
+  showShoeForm.value = false
+}
 
 const textColor = (store) => {
   return `text-${store.color}`

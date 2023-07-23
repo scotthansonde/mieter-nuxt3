@@ -109,16 +109,27 @@ const onSave = async () => {
     price: editedPurchase.value.price,
     note: editedPurchase.value.note,
   }
-  if (!isNew) variables.purchaseID = editedPurchase.value._id
-  if (isNew) {
+  if (!isNew.value) {
+    variables.purchaseID = editedPurchase.value._id
+    const { data: updatedPurchase } = await useFetch('/api/purchases', {
+      method: 'PUT',
+      body: variables,
+    })
+    console.log('PUT', updatedPurchase.value)
+  }
+  if (isNew.value) {
+    const { data: newPurchase } = await useFetch('/api/purchases', {
+      method: 'POST',
+      body: variables,
+    })
+    console.log('POST', newPurchase.value)
     const { data: newInvoice } = await useFetch('/api/purchases/invoice', {
       method: 'PUT',
       body: { invoiceNumber: variables.note },
     })
-    console.log(newInvoice.value)
+    console.log('PUT', newInvoice.value)
     refreshInvoice()
   }
-  console.log(variables)
   emit('closeForm')
 }
 </script>
