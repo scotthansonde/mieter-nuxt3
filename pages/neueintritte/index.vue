@@ -60,9 +60,8 @@ async function getWorkspaceList() {
   info.value += `<p>Suche Lohntransaktionen in WebCockpit ${startDate} bis ${endDate}... </p>`
   const { data, error } = await useFetch(`/api/webcockpit?startDate=${startDate}&endDate=${endDate}`)
   loading1.value = false
-  if (error) {
-    info.value += `<p>Probleme mit WebCockpit, versuche in ein paar Sekunden wieder</p>`
-    return
+  if (!data && error) {
+    console.log(error)
   }
   const lohnEntries = data.value.item.jobCodes
   info.value += `<p>${lohnEntries.length} Einträge gefunden… `
