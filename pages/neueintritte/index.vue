@@ -58,8 +58,12 @@ async function getWorkspaceList() {
   const endDate = yesterday.format().split('T')[0]
 
   info.value += `<p>Suche Lohntransaktionen in WebCockpit ${startDate} bis ${endDate}... </p>`
-  const { data } = await useFetch(`/api/webcockpit?startDate=${startDate}&endDate=${endDate}`)
+  const { data, error } = await useFetch(`/api/webcockpit?startDate=${startDate}&endDate=${endDate}`)
   loading1.value = false
+  if (error) {
+    info.value += `<p>Probleme mit WebCockpit, versuche in ein paar Sekunden wieder</p>`
+    return
+  }
   const lohnEntries = data.value.item.jobCodes
   info.value += `<p>${lohnEntries.length} Einträge gefunden… `
   const lohnPNs = new Set(lohnEntries.map((e) => e.employee.id))
