@@ -71,7 +71,7 @@ const props = defineProps({
   },
 })
 const { data: getPeople } = await useFetch('/api/people?filter=active')
-const { data: lastInvoice } = await useFetch('/api/purchases/invoice')
+const { data: lastInvoice, refresh: refreshInvoice } = await useFetch('/api/purchases/invoice')
 
 const editedPurchase = ref()
 const emptyPurchase = {
@@ -110,15 +110,15 @@ const onSave = async () => {
     note: editedPurchase.value.note,
   }
   if (!isNew) variables.purchaseID = editedPurchase.value._id
-  console.log(variables)
   if (isNew) {
     const { data: newInvoice } = await useFetch('/api/purchases/invoice', {
-      method: 'POST',
+      method: 'PUT',
       body: { invoiceNumber: variables.note },
     })
-    const digits = parseInt(newInvoice.value.invoiceNumber.match(/\d+/)[0])
-    emptyPurchase.note = `S-${digits + 1}`
+    console.log(newInvoice.value)
+    refreshInvoice()
   }
+  console.log(variables)
   emit('closeForm')
 }
 </script>
