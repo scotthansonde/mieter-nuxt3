@@ -60,8 +60,7 @@
       <v-row>
         <v-col>
           <!-- <PdfTableButtons table="table" :title="`Schuhe ${$_dateTitleString}`" /> -->
-          <v-btn color="primary" class="mr-2">Show PDF</v-btn>
-          <v-btn color="success">Save PDF</v-btn>
+          <PdfTableButtons table="table" :title="`Schuhe ${useDateTitleString()}`" />
         </v-col>
         <v-spacer></v-spacer>
         <v-col class="text-right">

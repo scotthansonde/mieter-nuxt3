@@ -24,6 +24,8 @@
     "@pinia/nuxt": "^0.4.11",
     "dayjs": "^1.11.9",
     "googleapis": "^122.0.0",
+    "jspdf": "^2.5.1",
+    "jspdf-autotable": "^3.5.31",
     "mongoose": "^7.4.0",
     "mongoose-lean-virtuals": "^0.9.1",
     "roboto-fontface": "^0.10.0",
