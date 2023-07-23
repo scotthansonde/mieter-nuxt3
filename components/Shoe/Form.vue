@@ -48,14 +48,20 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn v-if="!isNew" color="error" variant="elevated"> Delete </v-btn>
+          <v-btn v-if="!isNew" color="error" @click="confirmDelete = true" :disabled="confirmDelete" variant="elevated">
+            Delete
+          </v-btn>
           <v-spacer></v-spacer>
+          <v-btn color="secondary" :disabled="confirmDelete" variant="elevated" @click="closeDialog"> Cancel </v-btn>
+          <v-btn color="primary" :disabled="confirmDelete" variant="elevated" type="submit"> Submit </v-btn>
+        </v-card-actions>
+        <v-card-actions v-if="confirmDelete">
+          Wirklich löschen?
+          <v-btn color="error" variant="elevated" class="ml-2" @click="onDelete"> Confirm Delete </v-btn>
           <v-btn color="secondary" variant="elevated" @click="closeDialog"> Cancel </v-btn>
-          <v-btn color="primary" variant="elevated" type="submit"> Submit </v-btn>
         </v-card-actions>
       </v-form>
     </v-card>
-    <!-- <ConfirmDialog ref="confirm" /> -->
   </v-dialog>
 </template>
 
@@ -74,6 +80,7 @@ const { data: getPeople } = await useFetch('/api/people?filter=active')
 const { data: lastInvoice, refresh: refreshInvoice } = await useFetch('/api/purchases/invoice')
 
 const editedPurchase = ref()
+const confirmDelete = ref(false)
 const emptyPurchase = {
   itemID: '599150e061432c3facf818bb',
   price: 3198,
@@ -97,6 +104,17 @@ watchEffect(() => {
 })
 
 const closeDialog = () => {
+  confirmDelete.value = false
+  emit('closeForm')
+}
+
+const onDelete = async () => {
+  console.log('Delete Confirmed')
+  const variables = { purchaseID: editedPurchase.value._id }
+  const { data: deletedInvoice } = await useFetch('/api/purchases', {
+    method: 'DELETE',
+    body: variables,
+  })
   emit('closeForm')
 }
 

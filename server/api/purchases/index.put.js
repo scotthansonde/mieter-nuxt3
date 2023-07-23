@@ -2,7 +2,6 @@
 import Purchase from '~~/server/models/Purchase.js'
 
 export default defineEventHandler(async (event) => {
-  console.log('Calling PUT')
   const { purchaseID, buyerID, itemID, purchaseDate, bookingDate, price, note } = await readBody(event)
   const updatedPurchase = await Purchase.findOneAndUpdate(
     { _id: purchaseID },
