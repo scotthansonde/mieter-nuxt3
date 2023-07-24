@@ -64,6 +64,18 @@ async function getWorkspaceList() {
     console.log(error)
   }
   const lohnEntries = data.value.item.jobCodes
+
+  const zeroCornerstone = data.value.item.daily.filter((p) => p.employee.cornerstoneId === 0)
+  if (zeroCornerstone.length === 0) {
+    info.value += '<p>Alle Cornerstone IDs sind OK</p>'
+  } else {
+    info.value += '<p><strong>Folgende Cornerstone IDs in WebCockpit fehlen:</strong></p><ul>'
+    for (const p of zeroCornerstone) {
+      info.value += `<li><strong>${p.entries[0].restaurantNumber}</strong> ${p.employee.id} ${p.employee.firstName} ${p.employee.lastName} (Cornerstone ID ${p.employee.cornerstoneId})</li>`
+    }
+    info.value += '</ul><p></p>'
+  }
+
   info.value += `<p>${lohnEntries.length} Einträge gefunden… `
   const lohnPNs = new Set(lohnEntries.map((e) => e.employee.id))
   info.value += `${lohnPNs.size} PNs sind einmalig</p>`
