@@ -1,11 +1,13 @@
 import { defineNuxtConfig } from 'nuxt/config'
 import vuetify from 'vite-plugin-vuetify'
 
+let title = 'McD Nordheide Personal-App'
+if (process.env.NODE_ENV !== 'production') title = 'DEV McD Nordheide Personal-App'
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
   app: {
     head: {
-      title: `${process.env.NODE_ENV !== 'production' && 'DEV '}McD Nordheide Personal-App`,
+      title,
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/mcd-logo.svg' }],
     },
   },
