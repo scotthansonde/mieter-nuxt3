@@ -5,7 +5,7 @@ import vuetify from 'vite-plugin-vuetify'
 export default defineNuxtConfig({
   app: {
     head: {
-      title: 'McD Nordheide Personal-App',
+      title: `${process.env.NODE_ENV !== 'production' && 'DEV '}McD Nordheide Personal-App`,
       link: [{ rel: 'icon', type: 'image/svg+xml', href: '/mcd-logo.svg' }],
     },
   },
