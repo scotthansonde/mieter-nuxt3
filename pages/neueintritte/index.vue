@@ -39,10 +39,7 @@ definePageMeta({ middleware: 'auth' })
 const info = ref('')
 const error1 = ref(false)
 const loading1 = ref(false)
-
 const folderID = '1eJjvWugBMNfEtPx_PnroUFRlFe5gTLKX'
-const { data } = await useFetch('/api/people?filter=all')
-const getPeople = data.value
 
 async function getWorkspaceList() {
   error1.value = false
@@ -58,39 +55,27 @@ async function getWorkspaceList() {
   const endDate = yesterday.format().split('T')[0]
 
   info.value += `<p>Suche Lohntransaktionen in WebCockpit ${startDate} bis ${endDate}... </p>`
-  const { data, error } = await useFetch(`/api/webcockpit?startDate=${startDate}&endDate=${endDate}`)
+  const { data, error } = await useFetch(
+    `/api/webcockpit/check?startDate=${startDate}&endDate=${endDate}&monthString=${thisMonthString}`
+  )
   loading1.value = false
   if (!data && error) {
     console.log(error)
   }
-  const lohnEntries = data.value.item.jobCodes
+  const { zeroCornerstoneList, entries, uniqueEntries, newPeople } = data.value
 
-  const zeroCornerstone = data.value.item.daily.filter((p) => p.employee.cornerstoneId === 0)
-  if (zeroCornerstone.length === 0) {
+  if (zeroCornerstoneList.length === 0) {
     info.value += '<p>Alle Cornerstone IDs sind OK</p>'
   } else {
     info.value += '<p><strong>Folgende Cornerstone IDs in WebCockpit fehlen:</strong></p><ul>'
-    for (const p of zeroCornerstone) {
-      info.value += `<li><strong>${p.entries[0].restaurantNumber}</strong> ${p.employee.id} ${p.employee.firstName} ${p.employee.lastName} (Cornerstone ID ${p.employee.cornerstoneId})</li>`
+    for (const p of zeroCornerstoneList) {
+      info.value += `<li><strong>${p.employee.restaurantNumber}</strong> ${p.employee.id} ${p.employee.firstName} ${p.employee.lastName} (Cornerstone ID ${p.employee.cornerstoneId})</li>`
     }
     info.value += '</ul><p></p>'
   }
 
-  info.value += `<p>${lohnEntries.length} Einträge gefunden… `
-  const lohnPNs = new Set(lohnEntries.map((e) => e.employee.id))
-  info.value += `${lohnPNs.size} PNs sind einmalig</p>`
-
-  const neuInCornerstone = getPeople.filter((p) => p.eintrittsdatum?.includes(thisMonthString))
-  const neuInCornerstonePNs = neuInCornerstone.map((p) => p.personalnummer)
-  const cornerstonePNs = getPeople.map((p) => p.personalnummer)
-
-  const newPeople = []
-  for (const p of lohnPNs) {
-    if (neuInCornerstonePNs.includes(p.toString())) {
-      const c = getPeople.find((e) => e.personalnummer === p.toString())
-      newPeople.push(c)
-    }
-  }
+  info.value += `<p>${entries} Einträge gefunden… `
+  info.value += `${uniqueEntries} PNs sind einmalig</p>`
 
   info.value += `<p>${newPeople.length} Neueintritte im ${thisMonthString}</p>`
   info.value += '<ul>'
