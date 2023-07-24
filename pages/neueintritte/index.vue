@@ -77,12 +77,14 @@ async function getWorkspaceList() {
   info.value += `<p>${entries} Einträge gefunden… `
   info.value += `${uniqueEntries} PNs sind einmalig</p>`
 
-  info.value += `<p>${newPeople.length} Neueintritte im ${thisMonthString}</p>`
-  info.value += '<ul>'
-  for (const p of newPeople) {
-    info.value += `<li>${p.personalnummer} ${p.vollername} (${p.myPeopleOrtID})</li>`
+  info.value += `<p><strong>${newPeople.length} Neueintritte im ${thisMonthString}</strong></p>`
+  if (newPeople.length > 0) {
+    info.value += '<ul>'
+    for (const p of newPeople) {
+      info.value += `<li>${p.personalnummer} ${p.vollername} (${p.myPeopleOrtID})</li>`
+    }
+    info.value += '</ul>'
   }
-  info.value += '</ul>'
 
   info.value += `<p></p><p>Suche Google Drive Ordner ${thisMonthString}... `
   const { data: googleFolders } = await useFetch(`/api/workspace?folderID=${folderID}`)
