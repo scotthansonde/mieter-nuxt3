@@ -5,10 +5,13 @@
         <h2>Managers {{ $route.params.year }} - {{ $route.params.month }}</h2>
         <p><NuxtLink to="https://oldapp.mcd-nordheide.de/managers">Alte Manager App</NuxtLink></p>
         <ul>
-          <li v-for="m in managers" key="m.managerID">
+          <!-- <li v-for="m in managers" key="m.managerID">
             {{ m.store }} {{ m.person.personalnummer }} {{ m.name }} {{ m.position }} {{ m.vertrag }}
             {{ m.tarifgruppe }} {{ m.euroTarif }} {{ m.euroZuschlag }} {{ m.gehalt }} {{ m.fahrtkosten || '0,00€' }}
-            {{ m.bonus }} "{{ m.outputtedNote }}"
+            {{ m.bonus }} "{{ m.outputtedNote }}" 
+          </li> -->
+          <li v-for="m in managers" key="m.managerID">
+            {{ m.store }} {{ m.person.personalnummer }} {{ m.name }} {{ m.bonus }}
           </li>
         </ul>
       </v-col>

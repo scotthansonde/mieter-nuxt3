@@ -2,7 +2,8 @@ import { addDays, lastDayOfMonth } from 'date-fns'
 
 import Manager from '~~/server/models/Manager.js'
 import Wagegroup from '~~/server/models/Wagegroup.js'
-import V2Bonus from '~~/server/models/Bonus.js'
+// import V2Bonus from '~~/server/models/Bonus.js'
+import { payroll } from '~~/server/utils/payrollObject'
 
 import { tlValue, vertragText, formatEuros, noteValid } from '~~/server/utils/salaryUtils'
 import { bonusThisMonth, canReceiveBonus, calcBonus, sortManagers } from '~~/server/utils/bonusUtils'
@@ -21,9 +22,12 @@ export default defineEventHandler(async (event) => {
   const salaryLines = []
   const wagegroups = await Wagegroup.find({}).lean()
   const currentWagegroups = getCurrentWagegroups(wagegroups, reportDate)
-  const bonusLine = await V2Bonus.findOne({
-    payrollMonth: reportDateString,
-  }).lean()
+
+  // const bonusLine = await V2Bonus.findOne({
+  //   payrollMonth: reportDateString,
+  // }).lean()
+
+  const bonusLine = payroll.find((l) => l.payrollMonth === reportDateString)
   const payBonus = bonusThisMonth(bonusLine)
   const managers = await Manager.find({
     $and: [{ $or: [{ enddate: null }, { enddate: { $gte: reportDate } }] }, { startdate: { $lt: reportDate } }],

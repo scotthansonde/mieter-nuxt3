@@ -16,6 +16,7 @@ export function bonusThisMonth(bonusLine) {
 
 export function calcBonus(tl, store, bonus) {
   if (!bonus) return null
+  const year = parseInt(bonus.payrollMonth.slice(0, 4))
   const position = tlValue(tl, 'position')
   if (store === 'VERW') {
     if (!bonus.verwaltung) return null
@@ -26,7 +27,9 @@ export function calcBonus(tl, store, bonus) {
   const storeLastMonth = tlValue(tl, 'storeLastMonth')
   if (!bonus.stores.includes(storeLastMonth)) return null
   if (tlValue(tl, 'bonus') && tlValue(tl, 'bonus') !== '0') return tlValue(tl, 'bonus')
-  if (position === 'RM') return 45000
+  if (position === 'RM')
+    if (year > 2022) return 65000
+    else return 45000
   return 30000
 }
 
