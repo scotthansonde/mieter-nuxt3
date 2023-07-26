@@ -9,7 +9,7 @@
     "postinstall": "nuxt prepare"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.7.0",
+    "@nuxt/devtools": "^0.7.1",
     "@nuxtjs/google-fonts": "3.0.2",
     "@sidebase/nuxt-auth": "^0.5.0",
     "@types/node": "^20",
@@ -27,11 +27,11 @@
     "googleapis": "^122.0.0",
     "jspdf": "^2.5.1",
     "jspdf-autotable": "^3.5.31",
-    "mongoose": "^7.4.0",
+    "mongoose": "^7.4.1",
     "mongoose-lean-virtuals": "^0.9.1",
     "roboto-fontface": "^0.10.0",
     "sass": "^1.64.1",
     "vite-plugin-vuetify": "^1.0.2",
-    "vuetify": "^3.3.9"
+    "vuetify": "^3.3.10"
   }
 }

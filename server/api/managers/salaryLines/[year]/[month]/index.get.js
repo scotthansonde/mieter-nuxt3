@@ -67,6 +67,8 @@ export default defineEventHandler(async (event) => {
       const fkValue = hours > 0 ? parseInt(tlValue(currentTimeline, 'fahrtkosten')) : null
       const fahrtkosten = fkValue > 0 ? formatEuros(fkValue) : null
       const gehalt = formatEuros(currentWage.euro)
+      const euroTarif = formatEuros(currentWage.euroTarif)
+      const euroZuschlag = formatEuros(currentWage.euroZuschlag)
       const currentBonus = calcBonus(currentTimeline, store, bonusLine)
       const bonus = currentBonus ? formatEuros(currentBonus) : null
 
@@ -86,6 +88,8 @@ export default defineEventHandler(async (event) => {
         zuschlag,
         fahrtkosten,
         gehalt,
+        euroTarif,
+        euroZuschlag,
         bonus,
         outputtedNote,
         currentTimeline,
