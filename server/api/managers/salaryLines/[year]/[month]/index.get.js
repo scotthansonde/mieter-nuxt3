@@ -5,7 +5,7 @@ import Wagegroup from '~~/server/models/Wagegroup.js'
 // import V2Bonus from '~~/server/models/Bonus.js'
 import { payroll } from '~~/server/utils/payrollObject'
 
-import { tlValue, vertragText, formatEuros, noteValid } from '~~/server/utils/salaryUtils'
+import { tlValue, vertragText, formatEuros, noteValid, getCurrentTimeline } from '~~/server/utils/salaryUtils'
 import { bonusThisMonth, canReceiveBonus, calcBonus, sortManagers } from '~~/server/utils/bonusUtils'
 import { getCurrentWagegroups } from '~~/server/utils/wagegroupUtils'
 import { getCurrentWage } from '~~/server/utils/currentWage'
@@ -37,28 +37,7 @@ export default defineEventHandler(async (event) => {
   // eslint-disable-next-line no-unused-vars
   for (const manager of managers) {
     if (manager.timeline) {
-      const currentTimeline = []
-      const filteredTimeline = manager.timeline.filter((e) => e.eventDate <= reportDate)
-      filteredTimeline.sort(sortTL)
-
-      const types = [...new Set(filteredTimeline.map((e) => e.eventType))]
-      // timeline in reverse chronological order, find first
-      types.forEach((type) => {
-        const found = filteredTimeline.find((e) => e.eventType === type)
-        if (found) currentTimeline.push(found)
-      })
-
-      // Get last month's store to calculate bonus
-      const storeTimelineLastMonth = manager.timeline.filter(
-        (e) => e.eventDate <= endLastMonth && e.eventType === 'store'
-      )
-      storeTimelineLastMonth.sort(sortTL)
-      if (storeTimelineLastMonth.length > 0) {
-        currentTimeline.push({
-          ...storeTimelineLastMonth[0],
-          eventType: 'storeLastMonth',
-        })
-      }
+      const currentTimeline = getCurrentTimeline(manager.timeline, reportDate)
       manager.currentTimeline = currentTimeline
       const currentWage = getCurrentWage(manager, currentWagegroups)
 

@@ -1,3 +1,7 @@
+import { addDays, lastDayOfMonth } from 'date-fns'
+
+const sortTL = (tl1, tl2) => tl2.eventDate.getTime() - tl1.eventDate.getTime()
+
 export function tlValue(tl, attribute) {
   const event = tl.find((e) => e.eventType === attribute)
   if (!event) return null
@@ -37,4 +41,29 @@ export function formatEuros(amount) {
       }
     })
     .reduce((string, part) => string + part)
+}
+
+export function getCurrentTimeline(tl, reportDate) {
+  const currentTimeline = []
+  const filteredTimeline = tl.filter((e) => e.eventDate <= reportDate)
+  filteredTimeline.sort(sortTL)
+
+  const types = [...new Set(filteredTimeline.map((e) => e.eventType))]
+  // timeline in reverse chronological order, find first
+  types.forEach((type) => {
+    const found = filteredTimeline.find((e) => e.eventType === type)
+    if (found) currentTimeline.push(found)
+  })
+
+  // Get last month's store to calculate bonus
+  const endLastMonth = lastDayOfMonth(addDays(reportDate, -35))
+  const storeTimelineLastMonth = tl.filter((e) => e.eventDate <= endLastMonth && e.eventType === 'store')
+  storeTimelineLastMonth.sort(sortTL)
+  if (storeTimelineLastMonth.length > 0) {
+    currentTimeline.push({
+      ...storeTimelineLastMonth[0],
+      eventType: 'storeLastMonth',
+    })
+  }
+  return currentTimeline
 }
