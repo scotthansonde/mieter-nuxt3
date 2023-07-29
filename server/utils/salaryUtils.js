@@ -67,3 +67,36 @@ export function getCurrentTimeline(tl, reportDate) {
   }
   return currentTimeline
 }
+
+export function getCurrentItems(manager, wagegroups, bonusLine, reportDate) {
+  console.log('in getCurrentItems', reportDate)
+  const currentItems = {}
+  const currentWagegroups = getCurrentWagegroups(wagegroups, reportDate)
+  const currentTimeline = getCurrentTimeline(manager.timeline, reportDate)
+  manager.currentTimeline = currentTimeline
+  const currentWage = getCurrentWage(manager, currentWagegroups)
+
+  currentItems.store = tlValue(currentTimeline, 'store')
+  currentItems.position = tlValue(currentTimeline, 'position')
+  currentItems.tarifgruppe = tlValue(currentTimeline, 'tarifgruppe')
+  currentItems.hours = tlValue(currentTimeline, 'hours')
+  currentItems.vertrag = vertragText(currentItems.hours)
+  currentItems.zuschlag = tlValue(currentTimeline, 'gehaltNote')
+  const fkValue = currentItems.hours > 0 ? parseInt(tlValue(currentTimeline, 'fahrtkosten')) : null
+  currentItems.fahrtkosten = fkValue > 0 ? formatEuros(fkValue) : null
+  currentItems.gehalt = formatEuros(currentWage.euro)
+  currentItems.euroTarif = formatEuros(currentWage.euroTarif)
+  currentItems.euroZuschlag = formatEuros(currentWage.euroZuschlag)
+  if (bonusLine) {
+    const currentBonus = calcBonus(currentTimeline, currentItems.store, bonusLine)
+    currentItems.bonus = currentBonus ? formatEuros(currentBonus) : null
+  }
+  const noteEvent = currentTimeline.find((e) => e.eventType === 'note')
+
+  console.log('before noteValid', reportDate)
+  currentItems.outputtedNote = noteValid(noteEvent, reportDate)
+    ? noteEvent.eventValue
+    : tlValue(currentTimeline, 'permNote')
+  console.log(reportDate, currentItems.outputtedNote)
+  return currentItems
+}

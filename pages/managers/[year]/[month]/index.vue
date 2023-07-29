@@ -39,15 +39,15 @@
               </td>
               <td :class="textColor(s)">{{ `${m.person.personalnummer}` }}</td>
               <td :class="textColor(s)">{{ `${m.name}` }}</td>
-              <td>{{ `${m.position}` }}</td>
-              <td class="text-center">{{ `${m.vertrag}` }}</td>
-              <td class="text-center">{{ `${m.tarifgruppe}` }}</td>
-              <td class="text-right">{{ `${m.euroTarif}` }}</td>
-              <td class="text-right">{{ `${m.euroZuschlag}` }}</td>
-              <td class="text-right">{{ `${m.gehalt}` }}</td>
-              <td class="text-right">{{ `${m.fahrtkosten || ''}` }}</td>
-              <td class="text-right">{{ `${m.bonus || ''}` }}</td>
-              <td>{{ m.outputtedNote }}</td>
+              <td>{{ `${m.current.position}` }}</td>
+              <td class="text-center">{{ `${m.current.vertrag}` }}</td>
+              <td class="text-center">{{ `${m.current.tarifgruppe}` }}</td>
+              <td class="text-right">{{ `${m.current.euroTarif}` }}</td>
+              <td class="text-right">{{ `${m.current.euroZuschlag}` }}</td>
+              <td class="text-right">{{ `${m.current.gehalt}` }}</td>
+              <td class="text-right">{{ `${m.current.fahrtkosten || ''}` }}</td>
+              <td class="text-right">{{ `${m.current.bonus || ''}` }}</td>
+              <td>{{ m.current.outputtedNote }}</td>
             </tr>
           </template>
         </tbody>
@@ -70,7 +70,7 @@ const { data: managers, refresh } = await useFetch(`/api/managers/salaryLines/${
 
 const restaurantItems = (p) => {
   if (managers) {
-    return managers.value.filter((r) => r.store === p.shortname)
+    return managers.value.filter((r) => r.current.store === p.shortname)
   }
 }
 

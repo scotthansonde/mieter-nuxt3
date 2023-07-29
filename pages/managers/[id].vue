@@ -10,22 +10,22 @@
   </v-container>
   <v-container v-if="manager">
     <h2>Current Status</h2>
-    <v-row class="text-h3" :class="textColor(manager.currentStore)">
+    <v-row class="text-h3" :class="textColor(manager.current.store)">
       <v-col>
-        <div>{{ manager.currentStore }}</div>
+        <div>{{ manager.current.store }}</div>
       </v-col>
-      <v-col> {{ manager.currentPosition }} </v-col>
-      <v-col>{{ manager.currentTarifgruppe }}</v-col>
-      <v-col>{{ manager.currentHours }} Std</v-col>
+      <v-col> {{ manager.current.position }} </v-col>
+      <v-col>{{ manager.current.tarifgruppe }}</v-col>
+      <v-col>{{ manager.current.hours }} Std</v-col>
     </v-row>
-    <v-row class="text-h4" :class="textColor(manager.currentStore)">
-      <v-col> {{ manager.currentVertrag }} {{ manager.currentGehalt }} </v-col>
+    <v-row class="text-h4" :class="textColor(manager.current.store)">
+      <v-col> {{ manager.currentVertrag }} {{ manager.current.gehalt }} </v-col>
       <v-col> </v-col>
 
-      <v-col> Fahrtkosten: {{ manager.currentFahrtkosten }} </v-col>
+      <v-col> Fahrtkosten: {{ manager.current.fahrtkosten }} </v-col>
     </v-row>
     <v-row>
-      <v-col> Note: {{ manager.currentNote }}</v-col>
+      <v-col> Note: {{ manager.current.outputtedNote }}</v-col>
     </v-row>
   </v-container>
   <v-container fluid>
