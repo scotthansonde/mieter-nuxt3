@@ -1,15 +1,9 @@
 import { tlValue } from './salaryUtils'
 
-export function canReceiveBonus(tl) {
+function canReceiveBonus(tl) {
   if (tlValue(tl, 'hours') < 40 || tlValue(tl, 'position') === 'AZ' || tlValue(tl, 'bonus') < 0) {
     return false
   }
-  return true
-}
-
-export function bonusThisMonth(bonusLine) {
-  if (!bonusLine) return false
-  if (bonusLine.stores.length === 0 && !bonusLine.verwaltung) return false
   return true
 }
 
@@ -36,9 +30,6 @@ export function sortManagers(managers = []) {
   const positions = ['BL', 'OM', 'RM', 'SV', 'AS', 'SL', 'AZ', 'CC', 'FM', 'PP']
   const storeNames = ['DIB', 'WIN', 'RAD', 'SEE', 'ARC', 'PHX', 'VERW']
 
-  // function currentValue(m, type) {
-  //   return m.currentTimeline.filter((e) => e.eventType === type)?.[0]?.eventValue
-  // }
   function compare(a, b) {
     // sort inactives to end
     const inactiveA = parseInt(a.current.hours) === 0

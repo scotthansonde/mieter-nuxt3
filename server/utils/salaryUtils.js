@@ -1,4 +1,5 @@
 import { addDays, lastDayOfMonth } from 'date-fns'
+import { calcBonus } from './bonusUtils'
 
 const sortTL = (tl1, tl2) => tl2.eventDate.getTime() - tl1.eventDate.getTime()
 
@@ -8,7 +9,7 @@ export function tlValue(tl, attribute) {
   return event.eventValue
 }
 
-export function vertragText(hoursText) {
+function vertragText(hoursText) {
   const hours = parseInt(hoursText)
   if (hours === 169) return 'VZ'
   if (hours === 0) return 'Inaktiv'
@@ -17,13 +18,13 @@ export function vertragText(hoursText) {
   return ''
 }
 
-export function noteValid(noteEvent, reportDate) {
+function noteValid(noteEvent, reportDate) {
   if (!noteEvent) return false
   const noteDate = new Date(noteEvent.eventDate)
   return noteDate.setUTCDate(1) >= reportDate.setUTCDate(1)
 }
 
-export function formatEuros(amount) {
+function formatEuros(amount) {
   if (!amount) return ''
   const formatter = new Intl.NumberFormat('de-DE', {
     style: 'currency',
@@ -68,8 +69,20 @@ export function getCurrentTimeline(tl, reportDate) {
   return currentTimeline
 }
 
+function getCurrentWagegroups(wagegroups, reportDate) {
+  const currentWagegroups = []
+  // eslint-disable-next-line no-unused-vars
+  for (const wagegroup of wagegroups) {
+    const filteredWages = wagegroup.wages.filter((e) => e.startdate <= reportDate)
+    currentWagegroups.push({
+      ...wagegroup,
+      wages: filteredWages.slice(-1),
+    })
+  }
+  return currentWagegroups
+}
+
 export function getCurrentItems(manager, wagegroups, bonusLine, reportDate) {
-  console.log('in getCurrentItems', reportDate)
   const currentItems = {}
   const currentWagegroups = getCurrentWagegroups(wagegroups, reportDate)
   const currentTimeline = getCurrentTimeline(manager.timeline, reportDate)
@@ -93,10 +106,8 @@ export function getCurrentItems(manager, wagegroups, bonusLine, reportDate) {
   }
   const noteEvent = currentTimeline.find((e) => e.eventType === 'note')
 
-  console.log('before noteValid', reportDate)
   currentItems.outputtedNote = noteValid(noteEvent, reportDate)
     ? noteEvent.eventValue
     : tlValue(currentTimeline, 'permNote')
-  console.log(reportDate, currentItems.outputtedNote)
   return currentItems
 }
