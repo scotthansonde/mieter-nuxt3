@@ -69,7 +69,7 @@
       </v-row>
     </v-container>
   </v-container>
-  <ShoeForm v-model="showShoeForm" :purchase="purchase" @close-form="closeShoeForm" />
+  <ShoeForm v-model="showEditForm" :purchase="purchase" @close-form="closeShoeForm" />
 </template>
 
 <script setup>
@@ -80,7 +80,7 @@ const route = useRoute()
 const { year, month } = route.params
 const { data: purchases, refresh } = await useFetch(`/api/purchases/${year}/${month}/SCHU`)
 const purchase = ref({})
-const showShoeForm = ref(false)
+const showEditForm = ref(false)
 
 const totalAllPayments = computed(() => {
   if (!purchases) return 0
@@ -98,7 +98,7 @@ const totalPayments = (purchases) => {
 
 const createItem = () => {
   purchase.value = {}
-  showShoeForm.value = true
+  showEditForm.value = true
 }
 
 const editItem = (item) => {
@@ -106,12 +106,12 @@ const editItem = (item) => {
   purchase.value.buyerID = item.buyer._id
   purchase.value.itemID = item.item._id
   purchase.value.purchaseDate = useDate(item.purchaseDate)
-  showShoeForm.value = true
+  showEditForm.value = true
 }
 
 const closeShoeForm = () => {
   refresh()
-  showShoeForm.value = false
+  showEditForm.value = false
 }
 
 const textColor = (store) => {

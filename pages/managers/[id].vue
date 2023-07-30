@@ -35,7 +35,7 @@
         <thead>
           <tr>
             <th>
-              <!-- <v-btn v-if="$_isAdmin" x-small color="primary" @click.stop="createItem"> Add Event </v-btn> -->
+              <v-btn size="x-small" color="primary" @click.stop="createItem"> Add Event </v-btn>
             </th>
             <th class="text-left">Date</th>
             <th class="text-left">Type</th>
@@ -56,6 +56,7 @@
       </template>
     </v-table>
   </v-container>
+  <ManagerEventForm v-model="showEditForm" :event="event" @close-form="closeEditForm" />
 </template>
 
 <script setup>
@@ -63,10 +64,25 @@ import { useMainStore } from '@/stores/MainStore'
 const MainStore = useMainStore()
 const route = useRoute()
 const id = route.params.id
-const { data: manager } = await useFetch(`/api/managers/${id}`)
+const { data: manager, refresh } = await useFetch(`/api/managers/${id}`)
+const event = ref({})
+const showEditForm = ref(false)
 
 const createItem = () => {
-  console.log('createItem')
+  event.value = {}
+  showEditForm.value = true
+}
+
+const editItem = (e) => {
+  event.value = Object.assign({}, e)
+  event.value.eventDate = useDate(e.eventDate)
+  console.log(event.value)
+  showEditForm.value = true
+}
+
+const closeEditForm = () => {
+  refresh()
+  showEditForm.value = false
 }
 
 const textColor = (shortname) => {
