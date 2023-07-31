@@ -43,6 +43,10 @@ export default defineEventHandler(async (event) => {
     method: 'POST',
   })
   const data = await response.json()
+  const lohnEntries = data.item.jobCodes
+  const entries = lohnEntries.length
+  const lohnPNs = new Set(lohnEntries.map((e) => e.employee.id))
+  const uniqueEntries = lohnPNs.size
 
   const zeroCornerstone = data.item.daily.filter((p) => p.employee.cornerstoneId === 0)
   if (zeroCornerstone.length > 0) {
@@ -50,12 +54,14 @@ export default defineEventHandler(async (event) => {
       p.employee.restaurantNumber = p.entries[0].restaurantNumber
     }
   }
-  const zeroCornerstoneList = zeroCornerstone.map(({ entries, amount, ...keep }) => keep)
 
-  const lohnEntries = data.item.jobCodes
-  const entries = lohnEntries.length
-  const lohnPNs = new Set(lohnEntries.map((e) => e.employee.id))
-  const uniqueEntries = lohnPNs.size
+  const zeroCornerstoneWithHours = zeroCornerstone.filter((person, index) => {
+    const summary = lohnEntries.find((e) => e.employee.id === person.employee.id)
+    const hours = summary.entries.find((s) => s.earningDescription === 'Arbeitsstd')
+    return hours.amount > 0
+  })
+
+  const zeroCornerstoneList = zeroCornerstoneWithHours.map(({ entries, amount, ...keep }) => keep)
 
   const neuInCornerstone = people.filter((p) => {
     const eintrittsMonat = dayjs(p.eintrittsdatum).format('YYYY-MM')
@@ -69,8 +75,6 @@ export default defineEventHandler(async (event) => {
       newPeople.push(c)
     }
   }
-
-  console.log(newPeople.length)
 
   return { zeroCornerstoneList, entries, uniqueEntries, newPeople }
 })
