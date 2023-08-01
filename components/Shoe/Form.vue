@@ -115,6 +115,7 @@ const onDelete = async () => {
     method: 'DELETE',
     body: variables,
   })
+  confirmDelete.value = false
   emit('closeForm')
 }
 

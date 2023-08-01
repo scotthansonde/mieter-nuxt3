@@ -37,7 +37,7 @@ export const useNavStore = defineStore('NavStore', {
           title: 'Managers ',
           to: '/managers',
           color: 'blue',
-          role: 'BZ',
+          role: 'ADMIN',
         },
         {
           icon: 'mdi-food',

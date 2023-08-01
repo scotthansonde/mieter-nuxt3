@@ -76,7 +76,6 @@ const createItem = () => {
 const editItem = (e) => {
   event.value = Object.assign({}, e)
   event.value.eventDate = useDate(e.eventDate)
-  console.log(event.value)
   showEditForm.value = true
 }
 

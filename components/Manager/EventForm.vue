@@ -95,19 +95,23 @@ watchEffect(() => {
   }
 })
 
-const closeDialog = () => {
+const onDelete = async () => {
+  console.log('Delete Confirmed')
+  const variables = {
+    managerID: route.params.id,
+    eventID: editedEvent.value._id,
+  }
+  const { data: deletedEvent } = await useFetch('/api/managers/events', {
+    method: 'DELETE',
+    body: variables,
+  })
+  console.log('DELETE', deletedEvent.value)
   confirmDelete.value = false
   emit('closeForm')
 }
 
-const onDelete = async () => {
-  console.log('Delete Confirmed')
-  const variables = { eventID: editedEvent.value._id }
-  // const { data: deletedInvoice } = await useFetch('/api/purchases', {
-  //   method: 'DELETE',
-  //   body: variables,
-  // })
-  console.log('DELETE not yet implemented')
+const closeDialog = () => {
+  confirmDelete.value = false
   emit('closeForm')
 }
 
