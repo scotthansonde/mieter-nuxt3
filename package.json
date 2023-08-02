@@ -13,8 +13,6 @@
     "@nuxtjs/google-fonts": "3.0.2",
     "@sidebase/nuxt-auth": "^0.5.0",
     "@types/node": "^20",
-    "@vueuse/core": "^10.2.1",
-    "@vueuse/nuxt": "^10.2.1",
     "next-auth": "^4.21.1",
     "nuxt": "^3.6.5",
     "vue-currency-input": "^3.0.5"

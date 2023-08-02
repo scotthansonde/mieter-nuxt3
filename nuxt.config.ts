@@ -39,7 +39,7 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
     '@sidebase/nuxt-auth',
-    '@vueuse/nuxt',
+    // '@vueuse/nuxt',
   ],
 
   nitro: {
