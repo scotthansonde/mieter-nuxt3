@@ -111,6 +111,11 @@ export const payroll = [
   {
     payrollMonth: '2023-07',
     stores: ['DIB', 'RAD', 'WIN', 'PHX'],
+    verwaltung: { FM: 30000, OM: 150000, BL: 500000 },
+  },
+  {
+    payrollMonth: '2023-08',
+    stores: ['DIB', 'RAD', 'WIN', 'PHX'],
     verwaltung: { FM: 30000 },
   },
 ]
