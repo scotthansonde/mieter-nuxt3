@@ -57,7 +57,10 @@ export default defineEventHandler(async (event) => {
 
   const zeroCornerstoneWithHours = zeroCornerstone.filter((person, index) => {
     const summary = lohnEntries.find((e) => e.employee.id === person.employee.id)
-    const hours = summary.entries.find((s) => s.earningDescription === 'Arbeitsstd')
+    const hours = summary.entries.find(
+      (s) => s.earningDescription === 'Arbeitsstd' || s.earningDescription === 'Std. Mgmt.'
+    )
+    if (!hours) console.log(summary)
     return hours?.amount > 0
   })
 
