@@ -1,5 +1,5 @@
 import { Schema, model } from 'mongoose'
-
+import Person from './People.js'
 const integerEvents = ['gehalt', 'gehaltOverride', 'zuschlag', 'fahrtkosten', 'hours', 'bonus']
 
 const stringEvents = ['tarifgruppe', 'position', 'store', 'note', 'permNote', 'gehaltNote']
@@ -20,7 +20,7 @@ const managerSchema = new Schema(
     },
     person: {
       type: Schema.ObjectId,
-      ref: 'Person',
+      ref: Person,
       required: 'You must supply an manager!',
     },
     startdate: Date,
