@@ -2,6 +2,7 @@ import { addDays, lastDayOfMonth } from 'date-fns'
 
 import Manager from '~~/server/models/Manager.js'
 import Wagegroup from '~~/server/models/Wagegroup.js'
+import Person from '~~/server/models/People.js'
 // TODO: put payrollObject in bonus database
 import { payroll } from '~~/server/utils/payrollObject'
 import { sortManagers } from '~~/server/utils/bonusUtils'
