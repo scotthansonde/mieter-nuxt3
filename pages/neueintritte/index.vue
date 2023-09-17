@@ -108,12 +108,16 @@ async function getWorkspaceList() {
     const PDF = pdfNames.find((n) => {
       return n.includes(p.personalnummer)
     })
-    if (!PDF) {
+    if (!PDF && p.position === 'Crew') {
       withoutPDF.push(`${p.personalnummer} ${p.vollername} ${p.kostenstelle} hat keine SV-Meldung!`)
     } else {
-      const i = pdfFiles.findIndex((f) => f.name === PDF)
-      pdfFiles[i].hasHours = true
-      info.value += `<li>PDF für ${p.personalnummer} gefunden: "${PDF}"</li>`
+      if (p.position !== 'Crew') {
+        info.value += `<li>${p.personalnummer} ${p.vollername} ist kein Crew, wird nicht geprüft</li>`
+      } else {
+        const i = pdfFiles.findIndex((f) => f.name === PDF)
+        pdfFiles[i].hasHours = true
+        info.value += `<li>PDF für ${p.personalnummer} gefunden: "${PDF}"</li>`
+      }
     }
   }
   info.value += '</ul><p></p>'
