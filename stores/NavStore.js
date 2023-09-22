@@ -18,19 +18,17 @@ export const useNavStore = defineStore('NavStore', {
           color: 'yellow',
           role: 'USER',
         },
-
         {
-          icon: 'mdi-home',
-          title: 'Renters',
-          to: '/renters',
-          color: 'red',
-          role: 'DEPRECATED',
+          icon: 'mdi-account-star',
+          title: 'Personalnummern',
+          to: '/pn',
+          color: 'pink',
         },
         {
-          icon: 'mdi-shoe-sneaker',
-          title: 'Shoes',
-          to: '/shoes',
-          color: 'purple',
+          icon: 'mdi-check',
+          title: 'Prüfe Neueintritte',
+          to: '/neueintritte',
+          color: 'green',
         },
         {
           icon: 'mdi-account-tie',
@@ -40,17 +38,24 @@ export const useNavStore = defineStore('NavStore', {
           role: 'ADMIN',
         },
         {
+          icon: 'mdi-shoe-sneaker',
+          title: 'Shoes',
+          to: '/shoes',
+          color: 'purple',
+        },
+        {
+          icon: 'mdi-home',
+          title: 'Renters',
+          to: '/renters',
+          color: 'red',
+          role: 'DEPRECATED',
+        },
+        {
           icon: 'mdi-food',
           title: 'Personalessen',
           to: '/personalessen',
           color: 'green',
           role: 'DEPRECATED',
-        },
-        {
-          icon: 'mdi-account-star',
-          title: 'Neueintritte',
-          to: '/neueintritte',
-          color: 'green',
         },
         {
           icon: 'mdi-washing-machine',

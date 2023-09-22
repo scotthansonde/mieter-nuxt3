@@ -1,6 +1,8 @@
 <script setup>
 definePageMeta({ middleware: 'auth' })
 const filteredItems = useFilteredNavItems()
+// Remove the 'Welcome' item
+filteredItems.value.shift()
 </script>
 
 <template>

@@ -14,3 +14,9 @@ export function useFilteredNavItems() {
     })
   })
 }
+
+export function useShortname() {
+  const AuthStore = useAuthStore()
+  if (!AuthStore.user) return null
+  return AuthStore.user.email.includes('@') ? AuthStore.user.email.split('@')[0] : AuthStore.user.email
+}
