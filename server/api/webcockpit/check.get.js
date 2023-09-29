@@ -78,6 +78,6 @@ export default defineEventHandler(async (event) => {
       newPeople.push(c)
     }
   }
-
+  setResponseHeader(event, 'Cache-Control', 's-maxage=1, stale-while-revalidate')
   return { zeroCornerstoneList, entries, uniqueEntries, newPeople }
 })
