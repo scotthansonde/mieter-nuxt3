@@ -1,5 +1,5 @@
-import Person from '~~/server/models/People.js'
 import Reservation from '~~/server/models/Reservation.js'
+import { getAllPeople } from '../../utils/allPeopleUtils'
 
 function generateRandomIntegers(min, max, count, usedNumbers) {
   const result = []
@@ -18,9 +18,7 @@ function generateRandomIntegers(min, max, count, usedNumbers) {
 export default defineEventHandler(async (event) => {
   const { firstPN, store, name, creator } = await readBody(event)
   const fistPNInt = parseInt(firstPN)
-  const people = await Person.find().select(['personalnummer']).sort({
-    personalnummer: 'asc',
-  })
+  const people = await getAllPeople()
   const reservations = await Reservation.find().select(['personalnummer']).sort({
     personalnummer: 'asc',
   })

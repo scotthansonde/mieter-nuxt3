@@ -44,6 +44,9 @@ export default defineNuxtConfig({
 
   nitro: {
     plugins: ['@/server/db/index.ts'],
+    storage: {
+      data: { driver: 'vercelKV' },
+    },
   },
 
   runtimeConfig: {

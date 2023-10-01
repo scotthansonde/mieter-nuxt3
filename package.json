@@ -18,6 +18,7 @@
     "vue-currency-input": "^3.0.5"
   },
   "dependencies": {
+    "@vercel/kv": "^0.2.1",
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
     "date-fns": "^2.30.0",

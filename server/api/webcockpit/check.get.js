@@ -1,18 +1,6 @@
 import dayjs from 'dayjs'
-import Person from '~~/server/models/People.js'
+import { getAllPeople } from '../../utils/allPeopleUtils'
 const runtimeConfig = useRuntimeConfig()
-
-async function getPeople() {
-  const fields = Object.keys(Person.schema.paths).join(' ')
-  const query = {
-    $or: [{ austrittsdatum: null }, { austrittsdatum: { $gte: new Date() } }],
-  }
-  const people = await Person.find(query).select(fields).sort({
-    nachname: 'asc',
-    vorname: 'asc',
-  })
-  return people
-}
 
 async function loginWebcockpit() {
   const response = await fetch('https://www.webcockpit.app/Account/Login', {
@@ -27,11 +15,8 @@ async function loginWebcockpit() {
 }
 
 export default defineEventHandler(async (event) => {
-  const queryParams = getQuery(event)
-  const startDate = queryParams.startDate
-  const endDate = queryParams.endDate
-  const monthString = queryParams.monthString
-  const people = await getPeople()
+  const { startDate, endDate, monthString } = getQuery(event)
+  const people = await getAllPeople()
   const login = await loginWebcockpit()
   const response = await fetch('https://www.webcockpit.app/api/Payroll/getPayrollTransactionsData', {
     headers: {
@@ -78,6 +63,5 @@ export default defineEventHandler(async (event) => {
       newPeople.push(c)
     }
   }
-  setResponseHeader(event, 'Cache-Control', 's-maxage=1, stale-while-revalidate')
   return { zeroCornerstoneList, entries, uniqueEntries, newPeople }
 })
