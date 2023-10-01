@@ -47,8 +47,8 @@ async function getWorkspaceList() {
   info.value = ''
 
   const today = dayjs()
-  const thisMonthString = today.format('YYYY-MM')
   const yesterday = today.subtract(1, 'day')
+  const thisMonthString = yesterday.format('YYYY-MM')
   const firstOfMonth = yesterday.date(1)
 
   const startDate = firstOfMonth.format().split('T')[0]
@@ -131,6 +131,6 @@ async function getWorkspaceList() {
   for (const e of withoutPDF) info.value += `<li><strong>${e}</strong></li>`
   info.value += '</ul>'
   info.value += '<p></p><p>Betreffzeile für die Mail:<br />'
-  info.value += `PHKG - CREW – ${today.format('MM/YYYY')} – Lohndaten + ${pdfNames.length} Neueintritte</p>`
+  info.value += `PHKG - CREW – ${yesterday.format('MM/YYYY')} – Lohndaten + ${pdfNames.length} Neueintritte</p>`
 }
 </script>
