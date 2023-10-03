@@ -1,6 +1,7 @@
 import dayjs from 'dayjs'
 import { getAllPeople } from '../../utils/allPeopleUtils'
 const runtimeConfig = useRuntimeConfig()
+const storage = useStorage('data')
 
 async function loginWebcockpit() {
   const response = await fetch('https://www.webcockpit.app/Account/Login', {
@@ -14,8 +15,7 @@ async function loginWebcockpit() {
   return data
 }
 
-export default defineEventHandler(async (event) => {
-  const { startDate, endDate, monthString } = getQuery(event)
+async function getWebCockpitData(startDate, endDate, monthString) {
   const people = await getAllPeople()
   const login = await loginWebcockpit()
   const response = await fetch('https://www.webcockpit.app/api/Payroll/getPayrollTransactionsData', {
@@ -63,5 +63,28 @@ export default defineEventHandler(async (event) => {
       newPeople.push(c)
     }
   }
+  console.log('saving webcockpit to cache')
+  storage.setItem('checkWebcockpitTimestamp', new Date())
+  storage.setItem('checkWebcockpit', { zeroCornerstoneList, entries, uniqueEntries, newPeople })
   return { zeroCornerstoneList, entries, uniqueEntries, newPeople }
+}
+
+export default defineEventHandler(async (event) => {
+  const { startDate, endDate, monthString } = getQuery(event)
+  const now = dayjs()
+  const checkWebcockpitTimestamp = await storage.getItem('checkWebcockpitTimestamp')
+  const checkWebcockpitAge = now.diff(dayjs(checkWebcockpitTimestamp), 'second')
+  const cachedCheckWebcockpit = await storage.getItem('checkWebcockpit')
+
+  if (!cachedCheckWebcockpit) {
+    console.log('no cached webcockpit, returning from db')
+    return await getWebCockpitData(startDate, endDate, monthString)
+  } else {
+    console.log('webcockpit cache age', checkWebcockpitAge, 'seconds')
+    if (checkWebcockpitAge > 30) {
+      console.log('cached webockpit expired, return from cache and refresh db')
+      getWebCockpitData(startDate, endDate)
+    }
+    return cachedCheckWebcockpit
+  }
 })

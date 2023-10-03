@@ -24,7 +24,7 @@ export async function getAllPeople() {
     console.log('no cached people, returning from db')
     return await getAllPeopleFromDB()
   } else {
-    console.log('cache age', allPeopleAge, 'seconds')
+    console.log('people cache age', allPeopleAge, 'seconds')
     if (allPeopleAge > 300) {
       console.log('cached people expired, return from cache and refresh db')
       getAllPeopleFromDB()
