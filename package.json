@@ -13,14 +13,13 @@
     "@nuxtjs/google-fonts": "3.0.2",
     "@sidebase/nuxt-auth": "^0.5.0",
     "@types/node": "^20",
-    "next-auth": "^4.21.1",
     "nuxt": "^3.6.5",
     "vue-currency-input": "^3.0.5"
   },
   "dependencies": {
-    "@vercel/kv": "^0.2.1",
     "@mdi/font": "^7.2.96",
     "@pinia/nuxt": "^0.4.11",
+    "@vercel/kv": "^0.2.1",
     "date-fns": "^2.30.0",
     "dayjs": "^1.11.10",
     "googleapis": "^126.0.1",
@@ -28,6 +27,7 @@
     "jspdf-autotable": "^3.6.0",
     "mongoose": "^7.5.3",
     "mongoose-lean-virtuals": "^0.9.1",
+    "next-auth": "4.21.1",
     "roboto-fontface": "^0.10.0",
     "sass": "^1.68.0",
     "vite-plugin-vuetify": "^1.0.2",
