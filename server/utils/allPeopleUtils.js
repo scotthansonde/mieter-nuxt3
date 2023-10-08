@@ -10,6 +10,7 @@ async function getAllPeopleFromDB() {
   })
   storage.setItem('allPeople', people)
   storage.setItem('allPeopleTimestamp', new Date())
+  console.log('saved people to cache')
   return people
 }
 

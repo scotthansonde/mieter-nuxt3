@@ -63,9 +63,9 @@ async function getWebCockpitData(startDate, endDate, monthString) {
       newPeople.push(c)
     }
   }
-  console.log('saving webcockpit to cache')
   storage.setItem('checkWebcockpitTimestamp', new Date())
   storage.setItem('checkWebcockpit', { zeroCornerstoneList, entries, uniqueEntries, newPeople })
+  console.log('saved webcockpit to cache')
   return { zeroCornerstoneList, entries, uniqueEntries, newPeople }
 }
 
@@ -81,7 +81,7 @@ export default defineEventHandler(async (event) => {
     return await getWebCockpitData(startDate, endDate, monthString)
   } else {
     console.log('webcockpit cache age', checkWebcockpitAge, 'seconds')
-    if (checkWebcockpitAge > 30) {
+    if (checkWebcockpitAge > 300) {
       console.log('cached webockpit expired, return from cache and refresh db')
       getWebCockpitData(startDate, endDate)
     }
