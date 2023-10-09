@@ -83,7 +83,7 @@ export default defineEventHandler(async (event) => {
     console.log('webcockpit cache age', checkWebcockpitAge, 'seconds')
     if (checkWebcockpitAge > 300) {
       console.log('cached webockpit expired, return from cache and refresh db')
-      getWebCockpitData(startDate, endDate)
+      getWebCockpitData(startDate, endDate, monthString)
     }
     return cachedCheckWebcockpit
   }
