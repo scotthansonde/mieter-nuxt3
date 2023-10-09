@@ -23,7 +23,7 @@
         <v-col cols="6" sm="4" md="3">
           <v-btn color="primary" size="small" variant="elevated" type="submit" class="mt-sm-6">PN Reservieren</v-btn>
         </v-col>
-        <v-col cols="6" sm="4" md="3"> Erstellt von: {{ creator }} </v-col>
+        <v-col cols="6" sm="4" md="3"> Ersteller: {{ creator }} </v-col>
       </v-row>
     </v-form>
     <v-row>
@@ -50,27 +50,21 @@
       </v-col>
     </v-row>
   </v-container>
-  <v-container>
+  <v-container style="width: 100%">
     <ClientOnly>
-      <h3>Erstellte Personalummern</h3>
-      <v-table v-if="reservedPNs" density="compact" class="text-body-2 mt-2">
-        <thead>
-          <th>PN</th>
-          <th>Name</th>
-          <th>Store</th>
-          <th>Erstellt von</th>
-          <th>Am</th>
-        </thead>
-        <tbody>
-          <tr v-for="n in reservedPNs" :key="n._id">
-            <td>{{ n.personalnummer }}</td>
-            <td>{{ n.name }}</td>
-            <td>{{ n.store }}</td>
-            <td>{{ n.creator }}</td>
-            <td>{{ useDate(n.created) }}</td>
-          </tr>
-        </tbody>
-      </v-table>
+      <h3>Erstellte Personalnummern</h3>
+      <v-row v-if="reservedPNs.length > 0" class="mt-3">
+        <v-col v-for="p in reservedPNs" :key="p._id" cols="12" sm="6" md="3">
+          <v-card>
+            <v-card-title>{{ p.personalnummer }}{{ p.inUse ? '*' : '' }}</v-card-title>
+            <v-card-text>
+              {{ p.store }}
+              {{ p.name }} <br />
+              {{ p.creator }} - {{ useDate(p.created) }}
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
     </ClientOnly>
   </v-container>
 </template>

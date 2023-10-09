@@ -1,5 +1,5 @@
 import Reservation from '~~/server/models/Reservation.js'
-import { getAllPeople } from '../../utils/allPeopleUtils'
+import { getAllPeople } from '~~/server/utils/allPeopleUtils'
 
 function generateRandomIntegers(min, max, count, usedNumbers) {
   const result = []
