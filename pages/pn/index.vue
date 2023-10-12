@@ -54,7 +54,7 @@
     <ClientOnly>
       <h3>Erstellte Personalnummern</h3>
       <v-row v-if="reservedPNs.length > 0" class="mt-3">
-        <v-col v-for="p in reservedPNs" :key="p._id" cols="12" sm="6" md="3">
+        <v-col v-for="p in reservedPNs" :key="p._id" cols="12" sm="6" lg="4">
           <v-card>
             <v-card-title>{{ p.personalnummer }}{{ p.inUse ? '*' : '' }}</v-card-title>
             <v-card-text>
