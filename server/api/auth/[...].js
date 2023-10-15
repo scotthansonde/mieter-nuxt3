@@ -18,8 +18,10 @@ export default NuxtAuthHandler({
   ],
   callbacks: {
     signIn: async ({ profile }) => {
+      console.log(profile)
       const registeredUser = await User.findOne({ email: profile.email })
-      if (registeredUser) return true
+      const domainUser = profile.hd === 'mcdonalds-nordheide.de'
+      if (registeredUser || domainUser) return true
       return false
     },
     jwt: async ({ user, token, account }) => {

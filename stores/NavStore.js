@@ -16,7 +16,6 @@ export const useNavStore = defineStore('NavStore', {
           title: 'People ',
           to: '/people',
           color: 'yellow',
-          role: 'USER',
         },
         {
           icon: 'mdi-account-star',
@@ -42,6 +41,7 @@ export const useNavStore = defineStore('NavStore', {
           title: 'Shoes',
           to: '/shoes',
           color: 'purple',
+          role: 'OFFICE',
         },
         {
           icon: 'mdi-home',
@@ -69,6 +69,7 @@ export const useNavStore = defineStore('NavStore', {
           title: 'Beschwerden',
           href: 'https://mcd-nordheide.freshdesk.com/',
           color: 'orange',
+          role: 'USER',
         },
         {
           icon: 'mdi-login',
