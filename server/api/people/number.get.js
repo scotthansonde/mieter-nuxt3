@@ -15,7 +15,6 @@ export default defineEventHandler(async (event) => {
     } else {
       n.inUse = false
     }
-    console.log(n)
   }
   return numbers
 })

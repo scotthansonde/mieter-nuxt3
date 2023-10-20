@@ -98,7 +98,6 @@ const { refresh, data: reservedPNs } = await useFetch('/api/people/number', {
 })
 
 const onSubmit = async () => {
-  console.log(store.value)
   const { valid } = await myForm.value?.validate()
   if (valid) {
     const { number, firstPN } = store.value
