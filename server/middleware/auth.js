@@ -6,7 +6,7 @@ export default defineEventHandler(async (event) => {
     process.env.NODE_ENV === 'production' &&
     path.startsWith('/api/') &&
     !path.startsWith('/api/auth') &&
-    !path.startsWith('/api/cron')
+    !path.startsWith('/cron')
   ) {
     const session = await getServerSession(event)
     if (!session) {
