@@ -19,7 +19,7 @@ async function getWebCockpitData(startDate, endDate, monthString) {
 
   const zeroCornerstoneWithHours = zeroCornerstone.filter((person, index) => {
     const hourCodes = ['01', '03', '81']
-    const summary = lohnEntries.find((e) => e.employee.id === person.employee.id)
+    const summary = lohnEntries.find((e) => e.employee.id === person.employee.id && e.employee.cornerstoneId === 0)
     const hours = summary.entries.find((s) => hourCodes.includes(s.earningCode))
     return hours?.amount > 0
   })
