@@ -1,6 +1,5 @@
 import dayjs from 'dayjs'
 import { getWebcockpit } from '../../utils/webcockpit'
-const storage = useStorage('data')
 
 async function getWebCockpitData(startDate, endDate, monthString) {
   const people = await getAllPeople()
@@ -38,29 +37,10 @@ async function getWebCockpitData(startDate, endDate, monthString) {
       newPeople.push(c)
     }
   }
-  storage.setItem('checkWebcockpitTimestamp', new Date())
-  storage.setItem('checkWebcockpit', { zeroCornerstoneList, entries, uniqueEntries, newPeople })
-  console.log('saved checkWebcockpit to cache')
   return { zeroCornerstoneList, entries, uniqueEntries, newPeople }
 }
 
 export default defineEventHandler(async (event) => {
   const { startDate, endDate, monthString } = getQuery(event)
-  const now = dayjs()
-  const checkWebcockpitTimestamp = await storage.getItem('checkWebcockpitTimestamp')
-  const checkWebcockpitAge = now.diff(dayjs(checkWebcockpitTimestamp), 'second')
-  const cachedCheckWebcockpit = await storage.getItem('checkWebcockpit')
-
-  if (!cachedCheckWebcockpit) {
-    console.log('no cached checkWebcockpit, returning from db')
-    return await getWebCockpitData(startDate, endDate, monthString)
-  } else {
-    console.log('checkWebcockpit cache age', checkWebcockpitAge, 'seconds')
-
-    if (checkWebcockpitAge > 300) {
-      console.log('cached checkWebockpit expired, return from cache and refresh db')
-      getWebCockpitData(startDate, endDate, monthString)
-    }
-    return cachedCheckWebcockpit
-  }
+  return await getWebCockpitData(startDate, endDate, monthString)
 })
