@@ -14,7 +14,8 @@ const yesterday = now.subtract(1, 'day')
 const firstOfMonth = yesterday.date(1)
 
 const getLastTransactionDate = (cachedWebcockpit) => {
-  const { daily } = cachedWebcockpit.item
+  if (!cachedWebcockpit?.item) return null
+  const { daily } = cachedWebcockpit?.item
   const dates = new Set()
   daily.forEach((element) => {
     const { entries } = element
