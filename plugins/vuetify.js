@@ -1,36 +1,15 @@
 import { createVuetify } from 'vuetify'
 import colors from 'vuetify/lib/util/colors'
-import { mdi } from 'vuetify/lib/iconsets/mdi'
-import '@mdi/font/css/materialdesignicons.min.css'
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
 
-const myDarkTheme = {
-  dark: true,
-  colors: {
-    primary: colors.blue.darken2,
-    // accent: colors.grey.darken3,
-    accent: colors.grey.darken2,
-    secondary: colors.amber.darken3,
-    info: colors.teal.lighten1,
-    warning: colors.amber.base,
-    error: colors.deepOrange.accent4,
-    success: colors.green.accent3,
-  },
-}
-
-export default defineNuxtPlugin((nuxtApp) => {
+export default defineNuxtPlugin((app) => {
   const vuetify = createVuetify({
     ssr: true,
     theme: {
-      defaultTheme: 'myDarkTheme',
-      themes: { myDarkTheme },
-    },
-    icons: {
-      defaultSet: 'mdi',
-      sets: {
-        mdi,
-      },
+      defaultTheme: 'dark',
     },
   })
 
-  nuxtApp.vueApp.use(vuetify)
+  app.vueApp.use(vuetify)
 })

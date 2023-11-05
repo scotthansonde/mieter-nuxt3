@@ -30,11 +30,12 @@ export default defineNuxtConfig({
   },
 
   modules: [
-    // @ts-ignore
-    // this adds the vuetify vite plugin
-    // also produces type errors in the current beta release
-    async (options, nuxt) => {
-      nuxt.hooks.hook('vite:extendConfig', (config) => config.plugins.push(vuetify({ autoImport: true })))
+    // https://vuetifyjs.com/en/getting-started/installation/#using-nuxt-3
+    (_options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', (config) => {
+        // @ts-expect-error
+        config.plugins.push(vuetify({ autoImport: true }))
+      })
     },
     '@pinia/nuxt',
     '@nuxtjs/google-fonts',
@@ -72,7 +73,7 @@ export default defineNuxtConfig({
     prefetch: false,
     preconnect: false,
     preload: false,
-    download: false,
+    download: true,
     base64: false,
   },
 
