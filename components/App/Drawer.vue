@@ -3,10 +3,10 @@
     <v-navigation-drawer v-if="AuthStore.user" v-model="NavStore.drawer" width="150" class="d-print-none" fixed app>
       <v-list>
         <v-list-item v-for="(item, i) in filteredItems" :key="i" :to="item.to" router exact dense>
-          <template v-slot:prepend>
+          <template #prepend>
             <v-icon :icon="item.icon" />
           </template>
-          <v-list-item-title class="font-weight-medium text-subtitle-2" v-text="item.title" />
+          <v-list-item-title class="font-weight-medium text-subtitle-2">{{ item.title }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

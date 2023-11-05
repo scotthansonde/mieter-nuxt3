@@ -1,7 +1,6 @@
 import mongoose from 'mongoose'
-import { Nitro } from 'nitropack'
 
-export default (_nitroApp: Nitro) => {
+export default () => {
   const config = useRuntimeConfig()
   mongoose.connect(config.MONGO_URI).then(() => console.log('Connected to MongoDB'))
 }

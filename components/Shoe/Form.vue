@@ -26,6 +26,7 @@
 
               <v-col cols="8" sm="4">
                 <v-menu ref="menu">
+                  <!-- eslint-disable-next-line vue/no-unused-vars -->
                   <template #activator="{ on, attrs }">
                     <v-text-field v-model="editedPurchase.purchaseDate" label="Rechnungsdatum" required></v-text-field
                   ></template>
@@ -48,7 +49,7 @@
           </v-container>
         </v-card-text>
         <v-card-actions>
-          <v-btn v-if="!isNew" color="error" @click="confirmDelete = true" :disabled="confirmDelete" variant="elevated">
+          <v-btn v-if="!isNew" color="error" :disabled="confirmDelete" variant="elevated" @click="confirmDelete = true">
             Delete
           </v-btn>
           <v-spacer></v-spacer>
@@ -115,6 +116,7 @@ const onDelete = async () => {
     method: 'DELETE',
     body: variables,
   })
+  console.log(deletedInvoice.value)
   confirmDelete.value = false
   emit('closeForm')
 }

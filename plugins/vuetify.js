@@ -1,5 +1,4 @@
 import { createVuetify } from 'vuetify'
-import colors from 'vuetify/lib/util/colors'
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 

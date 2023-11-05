@@ -68,8 +68,8 @@
         </v-col>
       </v-row>
     </v-container>
+    <ShoeForm v-model="showEditForm" :purchase="purchase" @close-form="closeShoeForm" />
   </v-container>
-  <ShoeForm v-model="showEditForm" :purchase="purchase" @close-form="closeShoeForm" />
 </template>
 
 <script setup>

@@ -27,7 +27,8 @@
           <pre>Verbinde...</pre>
         </span>
         <pre v-else-if="error1">{{ info }}</pre>
-        <div v-html="info" v-else-if="info"></div>
+        <!-- eslint-disable-next-line vue/no-v-html -->
+        <div v-else-if="info" v-html="info"></div>
       </v-col>
     </v-row>
   </v-container>
@@ -56,7 +57,7 @@ async function getWorkspaceList() {
 
   info.value += `<p>Suche Lohntransaktionen in WebCockpit ${startDate} bis ${endDate}... </p>`
   const { data, error } = await useFetch(
-    `/api/webcockpit/check?startDate=${startDate}&endDate=${endDate}&monthString=${thisMonthString}`
+    `/api/webcockpit/check?startDate=${startDate}&endDate=${endDate}&monthString=${thisMonthString}`,
   )
   loading1.value = false
   if (!data && error) {

@@ -5,7 +5,7 @@
         <h2>Personalnummer reservieren</h2>
       </v-col>
     </v-row>
-    <v-form v-if="showForm" v-model="formValid" ref="myForm" @submit.prevent="onSubmit">
+    <v-form v-if="showForm" ref="myForm" v-model="formValid" @submit.prevent="onSubmit">
       <v-row>
         <v-col cols="12" sm="3" md="2">
           <v-select v-model="store" return-object label="Store" :items="stores" item-title="number" />
@@ -33,12 +33,12 @@
           color="secondary"
           size="small"
           variant="elevated"
-          @click="showForm = false"
           class="mt-sm-6"
+          @click="showForm = false"
         >
           Formular ausblenden
         </v-btn>
-        <v-btn v-else color="secondary" size="small" variant="elevated" @click="showForm = true" class="mt-sm-6">
+        <v-btn v-else color="secondary" size="small" variant="elevated" class="mt-sm-6" @click="showForm = true">
           Formular einblenden
         </v-btn>
       </v-col>
@@ -98,25 +98,27 @@ const { refresh, data: reservedPNs } = await useFetch('/api/people/number', {
 })
 
 const onSubmit = async () => {
-  const { valid } = await myForm.value?.validate()
-  if (valid) {
-    const { number, firstPN } = store.value
-    const variables = {
-      store: number,
-      firstPN,
-      name: name.value,
-      creator,
+  if (myForm.value) {
+    const { valid } = await myForm.value.validate()
+    if (valid) {
+      const { number, firstPN } = store.value
+      const variables = {
+        store: number,
+        firstPN,
+        name: name.value,
+        creator,
+      }
+      const { data } = await useFetch('/api/people/number', {
+        method: 'POST',
+        body: variables,
+      })
+      refresh()
+      name.value = ''
+      result.value = data
+      myForm.value?.reset()
+      store.value = stores.value[0]
+      showForm.value = false
     }
-    const { data } = await useFetch('/api/people/number', {
-      method: 'POST',
-      body: variables,
-    })
-    refresh()
-    name.value = ''
-    result.value = data
-    myForm.value?.reset()
-    store.value = stores.value[0]
-    showForm.value = false
   }
 }
 </script>

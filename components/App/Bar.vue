@@ -16,7 +16,7 @@
 </template>
 
 <script setup>
-const { status, signIn, signOut } = useAuth()
+const { status, signOut } = useAuth()
 import { useAuthStore } from '@/stores/AuthStore'
 import { useNavStore } from '@/stores/NavStore'
 const AuthStore = useAuthStore()

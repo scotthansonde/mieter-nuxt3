@@ -15,7 +15,7 @@ const firstOfMonth = yesterday.date(1)
 
 const getLastTransactionDate = (cachedWebcockpit) => {
   if (!cachedWebcockpit?.item) return null
-  const { daily } = cachedWebcockpit?.item
+  const { daily } = cachedWebcockpit.item
   const dates = new Set()
   daily.forEach((element) => {
     const { entries } = element
@@ -25,7 +25,7 @@ const getLastTransactionDate = (cachedWebcockpit) => {
   return date?.split('T')[0]
 }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const cachedWebcockpit = await storage.getItem('webcockpit')
   const lastTransactionDate = getLastTransactionDate(cachedWebcockpit)
   if (now.isAfter(sevenAMBerlin) && lastTransactionDate !== yesterday.format('YYYY-MM-DD')) {

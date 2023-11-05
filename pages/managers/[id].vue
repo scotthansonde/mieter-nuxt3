@@ -55,8 +55,8 @@
         </tbody>
       </template>
     </v-table>
+    <ManagerEventForm v-model="showEditForm" :event="event" @close-form="closeEditForm" />
   </v-container>
-  <ManagerEventForm v-model="showEditForm" :event="event" @close-form="closeEditForm" />
 </template>
 
 <script setup>

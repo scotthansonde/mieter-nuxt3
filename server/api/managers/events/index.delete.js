@@ -5,7 +5,7 @@ export default defineEventHandler(async (event) => {
   const { eventID, managerID } = await readBody(event)
 
   const manager = await Manager.findById(managerID)
-  const deletedEvent = await manager.timeline.pull(eventID)
+  const _deletedEvent = await manager.timeline.pull(eventID)
   const newTimeline = await manager.save()
   return newTimeline
 })

@@ -66,7 +66,7 @@ import { useMainStore } from '@/stores/MainStore'
 const MainStore = useMainStore()
 const route = useRoute()
 const { year, month } = route.params
-const { data: managers, refresh } = await useFetch(`/api/managers/salaryLines/${year}/${month}`)
+const { data: managers } = await useFetch(`/api/managers/salaryLines/${year}/${month}`)
 
 const restaurantItems = (p) => {
   if (managers) {

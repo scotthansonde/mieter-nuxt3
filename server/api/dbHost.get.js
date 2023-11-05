@@ -1,4 +1,4 @@
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (_event) => {
   const config = useRuntimeConfig()
   if (config.MONGO_URI.includes('evennode.com')) return { dbHost: 'prod' }
   if (config.MONGO_URI.includes('localhost')) return { dbHost: 'localhost' }

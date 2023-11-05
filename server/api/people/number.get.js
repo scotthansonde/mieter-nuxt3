@@ -1,7 +1,7 @@
 import Reservation from '~~/server/models/Reservation.js'
 import { getAllPeople } from '~~/server/utils/allPeopleUtils'
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async (_event) => {
   const people = await getAllPeople()
   const peopleNumbers = people.map((p) => p.personalnummer)
   const numbers = await Reservation.find()

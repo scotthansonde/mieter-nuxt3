@@ -44,7 +44,7 @@ export default defineNuxtConfig({
   ],
 
   nitro: {
-    plugins: ['@/server/db/index.ts'],
+    plugins: ['@/server/db/index.js'],
     storage: {
       // data: { driver: 'vercelKV' },
       data: { driver: 'mongodb', connectionString: process.env.DATABASE_URL, databaseName: process.env.DATABASE_NAME },
