@@ -63,7 +63,12 @@ export default defineNuxtConfig({
     },
   },
 
-  auth: { defaultProvider: 'google', origin: process.env.NUXTAUTH_ORIGIN },
+  auth: {
+    provider: {
+      type: 'authjs',
+    },
+    baseURL: process.env.NUXTAUTH_ORIGIN + 'api/auth',
+  },
 
   googleFonts: {
     families: {
