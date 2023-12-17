@@ -127,4 +127,8 @@ export const payroll = [
     payrollMonth: '2023-11',
     stores: ['DIB'],
   },
+  {
+    payrollMonth: '2023-12',
+    stores: ['DIB', 'RAD', 'WIN'],
+  },
 ]
