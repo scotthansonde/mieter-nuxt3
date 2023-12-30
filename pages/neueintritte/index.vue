@@ -63,10 +63,19 @@ async function getWorkspaceList() {
   if (!data && error) {
     console.log(error)
   }
-  const { zeroCornerstoneList, entries, uniqueEntries, newPeople } = data.value
+  const { zeroCornerstoneList, onlyCode67List, entries, uniqueEntries, newPeople } = data.value
+
+  info.value += `<p><strong>${onlyCode67List.length} Mitarbeiter mit Personalessen ohne Stunden</strong></p>`
+  if (onlyCode67List.length > 0) {
+    info.value += '<ul>'
+    for (const p of onlyCode67List) {
+      info.value += `<li><strong>${p.employee.restaurantNumber}</strong> ${p.employee.id} ${p.employee.firstName} ${p.employee.lastName} </li>`
+    }
+    info.value += '</ul><p></p>'
+  }
 
   if (zeroCornerstoneList.length === 0) {
-    info.value += '<p>Alle Cornerstone IDs sind OK</p>'
+    info.value += '<p><strong>Alle Cornerstone IDs sind OK</strong></p>'
   } else {
     info.value += '<p><strong>Folgende Cornerstone IDs in WebCockpit fehlen:</strong></p><ul>'
     for (const p of zeroCornerstoneList) {

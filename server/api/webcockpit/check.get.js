@@ -5,10 +5,28 @@ async function getWebCockpitData(startDate, endDate, monthString) {
   const people = await getAllPeople()
   const data = await getWebcockpit(startDate, endDate)
   const lohnEntries = data.item.jobCodes
+  const daily = data.item.daily
   const entries = lohnEntries.length
   const lohnPNs = new Set(lohnEntries.map((e) => e.employee.id))
   const uniqueEntries = lohnPNs.size
 
+  // Check for people with only Personalessen (code 67) and no hours
+
+  const onlyCode67Entries = daily.filter((e) => {
+    const codes = e.entries.map((e) => e.earningCode)
+    const uniqueCodes = new Set(codes)
+    return uniqueCodes.size === 1 && uniqueCodes.has('67')
+  })
+
+  if (onlyCode67Entries.length > 0) {
+    for (const p of onlyCode67Entries) {
+      p.employee.restaurantNumber = p.entries[0].restaurantNumber
+    }
+  }
+  // eslint-disable-next-line no-unused-vars
+  const onlyCode67List = onlyCode67Entries.map(({ entries, amount, ...keep }) => keep)
+
+  // Check for people with no Cornerstone ID and with hours
   const zeroCornerstone = data.item.daily.filter((p) => p.employee.cornerstoneId === 0)
   if (zeroCornerstone.length > 0) {
     for (const p of zeroCornerstone) {
@@ -22,7 +40,6 @@ async function getWebCockpitData(startDate, endDate, monthString) {
     const hours = summary.entries.find((s) => hourCodes.includes(s.earningCode))
     return hours?.amount > 0
   })
-
   // eslint-disable-next-line no-unused-vars
   const zeroCornerstoneList = zeroCornerstoneWithHours.map(({ entries, amount, ...keep }) => keep)
 
@@ -38,10 +55,11 @@ async function getWebCockpitData(startDate, endDate, monthString) {
       newPeople.push(c)
     }
   }
-  return { zeroCornerstoneList, entries, uniqueEntries, newPeople }
+  return { zeroCornerstoneList, onlyCode67List, entries, uniqueEntries, newPeople }
 }
 
 export default defineEventHandler(async (event) => {
   const { startDate, endDate, monthString } = getQuery(event)
+  console.log(startDate, endDate, monthString)
   return await getWebCockpitData(startDate, endDate, monthString)
 })
