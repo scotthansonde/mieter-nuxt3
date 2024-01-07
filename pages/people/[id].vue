@@ -16,6 +16,7 @@
             <div>Position: {{ data?.position }}</div>
             <div>Eintritt: {{ useDate(data?.eintrittsdatum) }}</div>
             <div v-if="!data.active">Austritt: {{ useDate(data?.austrittsdatum) }}</div>
+            <div v-else>{{ data.myPeopleTarifgruppe }} {{ data.myPeopleVertragsstundenMonat }} Stunden</div>
             <div class="mt-2">
               {{ `${data?.strasse}, ${data?.plz} ${data?.ort} ` }}
             </div>

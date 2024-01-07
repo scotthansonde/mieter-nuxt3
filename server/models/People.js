@@ -21,14 +21,35 @@ const personSchema = new Schema(
     ort: String,
     status: String,
     // Strings from the MyPeople list
-    myPeopleOrt: String,
+    myPeopleNachname: String,
+    myPeopleVorname: String,
+    myPeopleGeschlect: String,
     myPeopleOrtID: String,
     myPeopleID: String,
+    myPeopleLokalePN: String,
+    myPeoplePosition: String,
+    myPeopleEintrittsdatum: Date,
+    myPeopleStraße: { type: String, alias: 'myPeopleStrasse' },
+    myPeoplePlz: String,
+    myPeopleOrt: String,
+    myPeopleGeburtsdatum: Date,
+    myPeopleNationalität: { type: String, alias: 'myPeopleNationalitaet' },
+    myPeopleKündigungstermin: Date,
+    myPeopleKündigungAm: Date,
+    myPeopleTarifgruppe: String,
+    myPeopleTariflohn: String,
+    myPeopleStundenlohn: String,
+    myPeopleVertragsstundenTag: String,
+    myPeopleVertragsstundenWoche: String,
+    myPeopleVertragsstundenMonat: String,
+
+    myPeopleReportDate: String,
+    myPeopleHash: String,
   },
   {
     toJSON: { virtuals: true },
     toOjbect: { virtuals: true },
-  }
+  },
 )
 
 personSchema.virtual('sortiername').get(function () {
