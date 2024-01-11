@@ -28,6 +28,7 @@ const personSchema = new Schema(
     myPeopleID: String,
     myPeopleLokalePN: String,
     myPeoplePosition: String,
+    myPeopleErstEintrittsdatum: Date,
     myPeopleEintrittsdatum: Date,
     myPeopleStraße: { type: String, alias: 'myPeopleStrasse' },
     myPeoplePlz: String,
