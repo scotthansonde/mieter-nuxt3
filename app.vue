@@ -1,8 +1,10 @@
 <template>
   <v-layout>
     <v-app>
-      <AppDrawer />
-      <AppBar />
+      <ClientOnly>
+        <AppDrawer />
+        <AppBar />
+      </ClientOnly>
       <v-main>
         <v-container>
           <NuxtPage />
