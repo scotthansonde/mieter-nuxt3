@@ -21,7 +21,8 @@ function vertragText(hoursText) {
 function noteValid(noteEvent, reportDate) {
   if (!noteEvent) return false
   const noteDate = new Date(noteEvent.eventDate)
-  return noteDate.setUTCDate(1) >= reportDate.setUTCDate(1)
+  const compareReportDate = new Date(reportDate)
+  return noteDate.setUTCDate(1) >= compareReportDate.setUTCDate(1)
 }
 
 function formatEuros(amount) {
@@ -57,8 +58,7 @@ export function getCurrentTimeline(tl, reportDate) {
   })
 
   // Get last month's store to calculate bonus
-  const endLastMonth = lastDayOfMonth(addDays(lastDayOfMonth(reportDate), -35))
-  console.log(reportDate, endLastMonth)
+  const endLastMonth = lastDayOfMonth(addDays(reportDate, -35))
   const storeTimelineLastMonth = tl.filter((e) => e.eventDate <= endLastMonth && e.eventType === 'store')
   storeTimelineLastMonth.sort(sortTL)
   if (storeTimelineLastMonth.length > 0) {
