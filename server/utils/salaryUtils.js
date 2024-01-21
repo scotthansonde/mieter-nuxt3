@@ -57,7 +57,8 @@ export function getCurrentTimeline(tl, reportDate) {
   })
 
   // Get last month's store to calculate bonus
-  const endLastMonth = lastDayOfMonth(addDays(reportDate, -35))
+  const endLastMonth = lastDayOfMonth(addDays(lastDayOfMonth(reportDate), -35))
+  console.log(reportDate, endLastMonth)
   const storeTimelineLastMonth = tl.filter((e) => e.eventDate <= endLastMonth && e.eventType === 'store')
   storeTimelineLastMonth.sort(sortTL)
   if (storeTimelineLastMonth.length > 0) {
