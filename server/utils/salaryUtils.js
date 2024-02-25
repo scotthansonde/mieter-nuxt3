@@ -27,22 +27,10 @@ function noteValid(noteEvent, reportDate) {
 
 function formatEuros(amount) {
   if (!amount) return ''
-  const formatter = new Intl.NumberFormat('de-DE', {
+  return new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
-  })
-  // all this to remove the space before the € sign
-  const formatObject = formatter.formatToParts(amount / 100)
-  return formatObject
-    .map(({ type, value }) => {
-      switch (type) {
-        case 'literal':
-          return ''
-        default:
-          return value
-      }
-    })
-    .reduce((string, part) => string + part)
+  }).format(amount / 100)
 }
 
 export function getCurrentTimeline(tl, reportDate) {
@@ -90,6 +78,7 @@ export function getCurrentItems(manager, wagegroups, bonusLine, reportDate) {
   manager.currentTimeline = currentTimeline
   const currentWage = getCurrentWage(manager, currentWagegroups)
 
+  currentItems.values = currentWage
   currentItems.store = tlValue(currentTimeline, 'store')
   currentItems.position = tlValue(currentTimeline, 'position')
   currentItems.tarifgruppe = tlValue(currentTimeline, 'tarifgruppe')

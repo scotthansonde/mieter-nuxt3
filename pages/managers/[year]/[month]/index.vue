@@ -47,13 +47,15 @@
               <td class="text-right">{{ `${m.current.gehalt}` }}</td>
               <td class="text-right">{{ `${m.current.fahrtkosten || ''}` }}</td>
               <td class="text-right">{{ `${m.current.bonus || ''}` }}</td>
-              <td>{{ m.current.outputtedNote }}</td>
+              <td style="font-size: .8em;}">{{ m.current.outputtedNote }}</td>
             </tr>
             <tr v-if="restaurantItems(s).length" :key="s.shortname">
               <td colspan="5"></td>
               <td>Subtotal</td>
               <td class="text-right">{{ useEuro(totalEuroTarif(restaurantItems(s)) / 100) }}</td>
               <td class="text-right">{{ useEuro(totalEuroZuschlag(restaurantItems(s)) / 100) }}</td>
+              <td class="text-right">{{ useEuro(totalEuroGehalt(restaurantItems(s)) / 100) }}</td>
+              <td colspan="2"></td>
             </tr>
           </template>
         </tbody>
@@ -82,15 +84,18 @@ const restaurantItems = (p) => {
 
 const totalEuroTarif = (items) => {
   return items.reduce((ac, next) => {
-    const euroTarifNumber = Number(next.current.euroTarif.replace(/[.,€]/g, ''))
-    return ac + euroTarifNumber
+    return ac + next.current.values.euroTarif
   }, 0)
 }
 
 const totalEuroZuschlag = (items) => {
   return items.reduce((ac, next) => {
-    const euroZuschlagNumber = Number(next.current.euroZuschlag.replace(/[.,€]/g, ''))
-    return ac + euroZuschlagNumber
+    return ac + next.current.values.euroZuschlag
+  }, 0)
+}
+const totalEuroGehalt = (items) => {
+  return items.reduce((ac, next) => {
+    return ac + next.current.values.euroTarif + next.current.values.euroZuschlag
   }, 0)
 }
 
