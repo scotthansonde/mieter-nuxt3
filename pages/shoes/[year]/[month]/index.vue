@@ -93,7 +93,7 @@ const restaurantItems = (p) => {
 }
 
 const totalPayments = (purchases) => {
-  return purchases.reduce((ac, next) => ac + +next.price, 0)
+  return purchases.reduce((ac, next) => ac + next.price, 0)
 }
 
 const createItem = () => {

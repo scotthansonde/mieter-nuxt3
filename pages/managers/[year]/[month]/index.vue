@@ -49,6 +49,12 @@
               <td class="text-right">{{ `${m.current.bonus || ''}` }}</td>
               <td>{{ m.current.outputtedNote }}</td>
             </tr>
+            <tr v-if="restaurantItems(s).length" :key="s.shortname">
+              <td colspan="5"></td>
+              <td>Subtotal</td>
+              <td class="text-right">{{ useEuro(totalEuroTarif(restaurantItems(s)) / 100) }}</td>
+              <td class="text-right">{{ useEuro(totalEuroZuschlag(restaurantItems(s)) / 100) }}</td>
+            </tr>
           </template>
         </tbody>
       </template>
@@ -72,6 +78,20 @@ const restaurantItems = (p) => {
   if (managers) {
     return managers.value.filter((r) => r.current.store === p.shortname)
   }
+}
+
+const totalEuroTarif = (items) => {
+  return items.reduce((ac, next) => {
+    const euroTarifNumber = Number(next.current.euroTarif.replace(/[.,€]/g, ''))
+    return ac + euroTarifNumber
+  }, 0)
+}
+
+const totalEuroZuschlag = (items) => {
+  return items.reduce((ac, next) => {
+    const euroZuschlagNumber = Number(next.current.euroZuschlag.replace(/[.,€]/g, ''))
+    return ac + euroZuschlagNumber
+  }, 0)
 }
 
 const textColor = (restaurant) => {
