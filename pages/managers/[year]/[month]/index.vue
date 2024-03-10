@@ -5,8 +5,8 @@
       Gehälter sind erst ab Januar 2023 verfügbar
       <NuxtLink to="/managers">Aktuelle Monat</NuxtLink>
     </p>
-
-    <v-table v-else-if="managers" ref="myTable" density="compact" class="text-body-2 mb-2">
+    <ManagerBonus v-else @refresh-managers="refreshSalaryLines" />
+    <v-table v-if="managers && parseInt(year) > 2022" ref="myTable" density="compact" class="text-body-2 mb-2">
       <template #default>
         <thead>
           <tr>
@@ -74,8 +74,7 @@ import { useMainStore } from '@/stores/MainStore'
 const MainStore = useMainStore()
 const route = useRoute()
 const { year, month } = route.params
-const { data: managers } = await useFetch(`/api/managers/salaryLines/${year}/${month}`)
-
+const { data: managers, refresh } = await useFetch(`/api/managers/salaryLines/${year}/${month}`)
 const restaurantItems = (p) => {
   if (managers) {
     return managers.value.filter((r) => r.current.store === p.shortname)
@@ -101,6 +100,10 @@ const totalEuroGehalt = (items) => {
 
 const textColor = (restaurant) => {
   return `text-${restaurant.color}`
+}
+
+const refreshSalaryLines = async () => {
+  refresh()
 }
 </script>
 

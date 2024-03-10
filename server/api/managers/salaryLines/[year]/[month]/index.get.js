@@ -1,7 +1,6 @@
 import Manager from '~~/server/models/Manager.js'
 import Wagegroup from '~~/server/models/Wagegroup.js'
-// TODO: put payrollObject in bonus database
-import { payroll } from '~~/server/utils/payrollObject'
+import Payroll from '~~/server/models/Bonus.js'
 import { sortManagers } from '~~/server/utils/bonusUtils'
 
 export default defineEventHandler(async (event) => {
@@ -10,12 +9,15 @@ export default defineEventHandler(async (event) => {
   const reportDateString = `${year}-${month.toString().padStart(2, '0')}`
 
   const wagegroups = await Wagegroup.find({}).lean()
+
+  const payroll = await Payroll.find({}).lean()
   const managers = await Manager.find({
     $and: [{ $or: [{ enddate: null }, { enddate: { $gte: reportDate } }] }, { startdate: { $lt: reportDate } }],
   })
     .populate({ path: 'person' })
     .lean({ virtuals: true })
-  const bonusLine = payroll.find((l) => l.payrollMonth === reportDateString)
+
+  let bonusLine = payroll.find((l) => l.payrollMonth === reportDateString)
 
   const salaryLines = []
   for (const manager of managers) {
