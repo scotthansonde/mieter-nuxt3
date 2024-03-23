@@ -64,6 +64,11 @@
     <v-row>
       <v-col>
         <PdfTableButtons table="table" :title="`Management Gehälter ${useDateTitleString()}`" />
+        <PdfDataButtons
+          class="ml-2"
+          :data="pdfBonusItems(managers)"
+          :title="`Management Bonus ${useDateTitleString()}`"
+        />
       </v-col>
     </v-row>
   </v-container>
@@ -105,6 +110,19 @@ const textColor = (restaurant) => {
 const refreshSalaryLines = async () => {
   refresh()
 }
+const pdfBonusItems = (managers) => {
+  if (managers)
+    return managers
+      .filter((m) => m.current.bonus)
+      .map((m) => {
+        return {
+          Store: m.current.store,
+          PN: m.person.personalnummer,
+          Vertrag: m.current.vertrag,
+          Name: m.name,
+          Bonus: m.current.bonus || '',
+        }
+      })
+}
 </script>
-
 <style lang="scss" scoped></style>
