@@ -30,7 +30,9 @@ function formatEuros(amount) {
   return new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
-  }).format(amount / 100)
+  })
+    .format(amount / 100)
+    .replace(/\u00A0/g, '')
 }
 
 export function getCurrentTimeline(tl, reportDate) {

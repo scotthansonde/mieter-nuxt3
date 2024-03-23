@@ -2,7 +2,9 @@ export const useEuro = (num) => {
   return new Intl.NumberFormat('de-DE', {
     style: 'currency',
     currency: 'EUR',
-  }).format(num)
+  })
+    .format(num)
+    .replace(/\u00A0/g, '')
 }
 
 export const useDate = (date) => {
